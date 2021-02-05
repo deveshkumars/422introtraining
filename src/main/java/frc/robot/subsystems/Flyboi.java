@@ -2,7 +2,6 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.controller.SimpleMotorFeedforward;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import frc.robot.RobotMap;
@@ -14,10 +13,6 @@ public class Flyboi extends SubsystemBase {
 
     private CANSparkMax leftFlywheel;
     private CANSparkMax rightFlywheel;
-    public CANEncoder leftEncoder;
-    public CANEncoder rightEncoder;
-    private CANSparkMax feederWheel;
-    public CANEncoder feederEncoder;
     private SimpleMotorFeedforward feedforward;
 
     public double wheelSpeed = 0.80;
@@ -27,11 +22,6 @@ public class Flyboi extends SubsystemBase {
         //shooter things
         this.leftFlywheel = new CANSparkMax(RobotMap.leftFlywheel, MotorType.kBrushless);
         this.rightFlywheel = new CANSparkMax(RobotMap.rightFlywheel, MotorType.kBrushless);
-        this.leftEncoder = leftFlywheel.getEncoder();
-        this.rightEncoder = rightFlywheel.getEncoder();
-        //cell stop things
-        this.feederWheel = new CANSparkMax(RobotMap.feederWheel, MotorType.kBrushless);
-        this.feederEncoder = feederWheel.getEncoder();
         //PID stuff
         this.feedforward = new SimpleMotorFeedforward(1.05, 1.0);
     }
@@ -59,7 +49,7 @@ public class Flyboi extends SubsystemBase {
      * @return The velocity of the flywheel as found by the left flywheel encoder (around -1 to 1).
      */
     public double getPower() {
-        return (leftEncoder.getVelocity()/5600);
+        return leftFlywheel.getEncoder().getVelocity()/5600;
     }
 
     /**
