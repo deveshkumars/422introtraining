@@ -11,7 +11,7 @@ public class SlowFast extends CommandBase {
 
     public SlowFast() {
         setName("SlowFast");
-        addRequirements(Subsystems.drivebase);
+        addRequirements(Subsystems.driveBase);
     }
 
     public void initialize() {

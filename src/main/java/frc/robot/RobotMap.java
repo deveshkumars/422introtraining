@@ -13,6 +13,7 @@ public class RobotMap {
     public static boolean isSpeedMode = true;
     public static boolean isFirstCamera = true;
     public static boolean isIntakeDown = false;
+    public static int cellCount = 3;
 
     // Drive base ports
 
