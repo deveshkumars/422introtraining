@@ -43,7 +43,7 @@ public class RobotMap {
     public static int intakeExtensionOut;
     public static int intakeExtensionIn;
 
-    // Sensor ports
+    // Sensor ports 
 
     // UI Ports
 
@@ -51,7 +51,7 @@ public class RobotMap {
     public static final int operatorXboxController = 2;
 
     public enum BotNames {
-        COMPETITION
+        COMPETITION, TOASTER, AXIDRIVE
     }
 
     public static BotNames botName;
@@ -69,6 +69,50 @@ public class RobotMap {
             rightFrontFollower = 422;
             rightMiddleMaster = 422;
             rightRearFollower = 422;
+            wheelDiameter = 6;
+
+            leftFlywheel = 422;
+            rightFlywheel = 422;
+            intakeMotor = 422;
+            bottomBelt = 422;
+            middleBelt = 422;
+            feederWheel = 422;
+
+            leftClimber = 422;
+            rightClimber = 422;
+
+            intakeExtensionIn = 0;
+            intakeExtensionOut = 1;
+        } else if (bot == BotNames.TOASTER){
+            leftMiddleMaster = 2;
+            leftFrontFollower = 3;
+            leftRearFollower = 6;
+            rightMiddleMaster = 14;
+            rightFrontFollower = 5; 
+            rightRearFollower = 4;
+
+            wheelDiameter = 6;
+
+            leftFlywheel = 422;
+            rightFlywheel = 422;
+            intakeMotor = 422;
+            bottomBelt = 422;
+            middleBelt = 422;
+            feederWheel = 422;
+
+            leftClimber = 422;
+            rightClimber = 422;
+
+            intakeExtensionIn = 0;
+            intakeExtensionOut = 1;
+        } else if (bot == BotNames.AXIDRIVE){
+            leftMiddleMaster = 1;
+            leftFrontFollower = 2;
+            leftRearFollower = 3;
+            rightMiddleMaster = 4;
+            rightFrontFollower = 5; 
+            rightRearFollower = 6;
+
             wheelDiameter = 6;
 
             leftFlywheel = 422;

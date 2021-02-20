@@ -17,14 +17,21 @@ public class Robot extends TimedRobot {
     public void robotInit() {
         // Setup bot choice, camera feed(s) - see FRC-20
 
+        //Choose from AXIDRIVE (Axiom drivebase), TOASTER, and COMPETITION
+        RobotMap.setBot(RobotMap.BotNames.TOASTER);
+        System.out.println("Initializing" + RobotMap.botName);
+
         //drive settings
-        // Subsystems.driveBase.cheesyDrive.setSafetyEnabled(false);
+        Subsystems.driveBase.setDefaultCommand(new TankDrive());
+        Subsystems.driveBase.cheesyDrive.setSafetyEnabled(false);
 
         //driver controls (buttons)
+        UserInterface.driverController.RB.whenPressed(new SlowFast());
 
         //operator controls (buttons)
         UserInterface.operatorController.LB.whileHeld(new Vomit());
         UserInterface.operatorController.RB.whenPressed(new IntakeToggle());
+        
     }
 
     public void robotPeriodic() {
@@ -47,7 +54,7 @@ public class Robot extends TimedRobot {
 
     public void autonomousPeriodic() {}
 
-    public void teleopInit() {
+    public void teleopInit() { 
         System.out.println("TeleOp Initalized");
         CommandScheduler.getInstance().cancelAll();
     }
