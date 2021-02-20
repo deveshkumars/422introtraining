@@ -18,7 +18,7 @@ public class Robot extends TimedRobot {
         // Setup bot choice, camera feed(s) - see FRC-20
 
         //Choose from AXIDRIVE (Axiom drivebase), TOASTER, and COMPETITION
-        RobotMap.setBot(RobotMap.BotNames.TOASTER);
+        RobotMap.setBot(RobotMap.BotNames.AXIDRIVE);
         System.out.println("Initializing" + RobotMap.botName);
 
         //drive settings
