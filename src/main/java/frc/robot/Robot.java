@@ -14,11 +14,13 @@ public class Robot extends TimedRobot {
     private boolean oldLeftTriggerOn = false;
     private boolean oldRightTriggerOn = false;
 
-    public void robotInit() {
-        // Setup bot choice, camera feed(s) - see FRC-20
+    public Robot() {
+        super(0.06);
+    }
 
+    public void robotInit() {
         //Choose from AXIDRIVE (Axiom drivebase), TOASTER, and COMPETITION
-        RobotMap.setBot(RobotMap.BotNames.AXIDRIVE);
+        RobotMap.setBot(RobotMap.BotNames.TOASTER);
         System.out.println("Initializing" + RobotMap.botName);
 
         //drive settings
@@ -32,15 +34,18 @@ public class Robot extends TimedRobot {
         UserInterface.operatorController.LB.whileHeld(new Vomit());
         UserInterface.operatorController.RB.whenPressed(new IntakeToggle());
         
+        ShuffleboardControl.layoutShuffleboard();
     }
 
     public void robotPeriodic() {
         CommandScheduler.getInstance().run();
+        ShuffleboardControl.printDataToShuffleboard();
     }
 
     public void disabledInit() {
         System.out.println("Disabled Initialized");
         CommandScheduler.getInstance().cancelAll();
+        ShuffleboardControl.disabledPeriodic();
     }
 
     public void disabledPeriodic() {}
