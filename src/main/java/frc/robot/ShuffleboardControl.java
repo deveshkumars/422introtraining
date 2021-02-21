@@ -28,6 +28,9 @@ public class ShuffleboardControl {
 
     private static NetworkTableEntry operatorControllerWidget;
 
+    // The number of ticks since autonomous was enabled. Used for the match time widget.
+    private static int autoEnabledTicks = 100;
+
     // SHUFFLEBOARD
 
     /**
@@ -99,7 +102,7 @@ public class ShuffleboardControl {
             .withSize(2, 1).getEntry();
         
         matchTimeWidget = teleopTab.add("Match time", 150)
-            .withWidget("Match time")
+            .withWidget("Match Time")
             .withPosition(6, 1)
             .withSize(3, 2).getEntry();
 
@@ -143,7 +146,12 @@ public class ShuffleboardControl {
         ballOverflowWidget.setBoolean(RobotMap.cellCount > 5);
 
         //match time
-        matchTimeWidget.setDouble(DriverStation.getInstance().getMatchTime() + (DriverStation.getInstance().isAutonomous() ? 135 : 0));
+        double time = DriverStation.getInstance().getMatchTime();
+        if (time == -1 && DriverStation.getInstance().isDisabled()) time = 0;
+        if (DriverStation.getInstance().isAutonomousEnabled()) autoEnabledTicks = 0;
+        else autoEnabledTicks++;
+        if (DriverStation.getInstance().isAutonomousEnabled() || (DriverStation.getInstance().isDisabled() && autoEnabledTicks < 50)) time += 135;
+        matchTimeWidget.setDouble(time);
 
         //sensor values
         encodersWidget.setString(Subsystems.driveBase.getLeftPosition() + " L " + Subsystems.driveBase.getRightPosition() + " R");
