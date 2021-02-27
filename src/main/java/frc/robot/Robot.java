@@ -5,11 +5,15 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.*;
 import frc.robot.userinterface.UserInterface;
 import frc.robot.subsystems.*;
+import edu.wpi.first.wpilibj2.command.Command;
 
 /**
  * The main Robot class whence all things come.
  */
 public class Robot extends TimedRobot {
+    private Command auto_command;
+
+    private RobotContainer robotContainer;
     
     private boolean oldLeftTriggerOn = false;
     private boolean oldRightTriggerOn = false;
@@ -23,7 +27,7 @@ public class Robot extends TimedRobot {
 
         //drive settings
         Subsystems.driveBase.setDefaultCommand(new TankDrive());
-        Subsystems.driveBase.cheesyDrive.setSafetyEnabled(false);
+        Subsystems.driveBase.drive.setSafetyEnabled(false);
 
         //driver controls (buttons)
         UserInterface.driverController.RB.whenPressed(new SlowFast());
@@ -32,6 +36,7 @@ public class Robot extends TimedRobot {
         UserInterface.operatorController.LB.whileHeld(new Vomit());
         UserInterface.operatorController.RB.whenPressed(new IntakeToggle());
         
+        robotContainer = new RobotContainer();
     }
 
     public void robotPeriodic() {
@@ -50,6 +55,11 @@ public class Robot extends TimedRobot {
         CommandScheduler.getInstance().cancelAll();
 
         // Schedule autonomous command to run
+        auto_command = robotContainer.getAutonomousCommand();
+
+        if (auto_command != null) {
+            auto_command.schedule();
+        }
     }
 
     public void autonomousPeriodic() {}
@@ -57,6 +67,10 @@ public class Robot extends TimedRobot {
     public void teleopInit() { 
         System.out.println("TeleOp Initalized");
         CommandScheduler.getInstance().cancelAll();
+
+        if (auto_command != null) {
+            auto_command.cancel();
+        }
     }
 
     public void teleopPeriodic() {

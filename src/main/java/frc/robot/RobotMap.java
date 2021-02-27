@@ -1,5 +1,7 @@
 package frc.robot;
 
+import edu.wpi.first.wpilibj.kinematics.DifferentialDriveKinematics;
+
 /**
  * Ports for motor controllers, caps for speed and rotation, booleans for toggles, and turn direction.
  */
@@ -49,6 +51,21 @@ public class RobotMap {
 
     public static final int driverXboxController = 1;
     public static final int operatorXboxController = 2;
+
+    // Autonomous Values
+    public static final double ksVolts = 1.5;
+    public static final double kvVoltSecondsPerMeter = 2.5;
+    public static final double kaVoltSecondsSquaredPerMeter = 0.0619;
+    public static final double kPDriveVel = 1.09;
+ 
+    public static final double kTrackWidthMeters = 1.801111093;
+    public static final DifferentialDriveKinematics kDriveKinematics = new DifferentialDriveKinematics(kTrackWidthMeters);
+ 
+    public static final double kMaxSpeedMetersPerSecond = 3.66;
+    public static final double kMaxAccelerationMetersPerSecondSquared = 2;
+ 
+    public static final double kRamseteB = 2;
+    public static final double kRamseteZeta = 0.7;
 
     public enum BotNames {
         COMPETITION, TOASTER, AXIDRIVE
