@@ -47,11 +47,12 @@ public class RobotMap {
 
     // UI Ports
 
-    public static final int driverXboxController = 1;
+    public static final int leftJoystyx = 0;
+    public static final int rightJoystyx = 1;
     public static final int operatorXboxController = 2;
 
     public enum BotNames {
-        COMPETITION, TOASTER, AXIDRIVE
+        COMPETITION, TOASTER, AXIDRIVE, PBOT20
     }
 
     public static BotNames botName;
@@ -112,6 +113,29 @@ public class RobotMap {
             rightMiddleMaster = 4;
             rightFrontFollower = 5; 
             rightRearFollower = 6;
+
+            wheelDiameter = 6;
+
+            leftFlywheel = 422;
+            rightFlywheel = 422;
+            intakeMotor = 422;
+            bottomBelt = 422;
+            middleBelt = 422;
+            feederWheel = 422;
+
+            leftClimber = 422;
+            rightClimber = 422;
+
+            intakeExtensionIn = 0;
+            intakeExtensionOut = 1;
+        } else if (bot == BotNames.PBOT20){
+            //jenkyboi tm
+            leftMiddleMaster = 34;
+            leftFrontFollower = 3;
+            leftRearFollower = 6;
+            rightMiddleMaster = 31;
+            rightFrontFollower = 5; 
+            rightRearFollower = 4;
 
             wheelDiameter = 6;
 

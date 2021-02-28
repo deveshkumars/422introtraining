@@ -19,16 +19,13 @@ public class Robot extends TimedRobot {
     }
 
     public void robotInit() {
-        //Choose from AXIDRIVE (Axiom drivebase), TOASTER, and COMPETITION
-        RobotMap.setBot(RobotMap.BotNames.TOASTER);
+        //Choose from AXIDRIVE (Axiom drivebase), TOASTER, PBOT20 (2020 pbot), and COMPETITION
+        RobotMap.setBot(RobotMap.BotNames.PBOT20);
         System.out.println("Initializing" + RobotMap.botName);
 
         //drive settings
         Subsystems.driveBase.setDefaultCommand(new TankDrive());
         Subsystems.driveBase.cheesyDrive.setSafetyEnabled(false);
-
-        //driver controls (buttons)
-        UserInterface.driverController.RB.whenPressed(new SlowFast());
 
         //operator controls (buttons)
         UserInterface.operatorController.LB.whileHeld(new Vomit());
