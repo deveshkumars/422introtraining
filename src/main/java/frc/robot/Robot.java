@@ -19,7 +19,7 @@ public class Robot extends TimedRobot {
     }
 
     public void robotInit() {
-        //Choose from AXIDRIVE (Axiom drivebase), TOASTER, and COMPETITION
+        //Choose from AXIDRIVE (Axiom drivebase), TOASTER, PBOT20 (42D2), and COMPETITION
         RobotMap.setBot(RobotMap.BotNames.TOASTER);
         System.out.println("Initializing" + RobotMap.botName);
 

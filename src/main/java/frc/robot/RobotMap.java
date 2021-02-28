@@ -51,7 +51,7 @@ public class RobotMap {
     public static final int operatorXboxController = 2;
 
     public enum BotNames {
-        COMPETITION, TOASTER, AXIDRIVE
+        COMPETITION, TOASTER, AXIDRIVE, PBOT20
     }
 
     public static BotNames botName;
@@ -127,8 +127,31 @@ public class RobotMap {
 
             intakeExtensionIn = 0;
             intakeExtensionOut = 1;
-        }
+        }else if (bot == BotNames.PBOT20){
+        //jenkyboi tm
+        leftMiddleMaster = 34;
+        leftFrontFollower = 3;
+        leftRearFollower = 6;
+        rightMiddleMaster = 31;
+        rightFrontFollower = 5; 
+        rightRearFollower = 4;
+
+        wheelDiameter = 6;
+
+        leftFlywheel = 422;
+        rightFlywheel = 422;
+        intakeMotor = 422;
+        bottomBelt = 422;
+        middleBelt = 422;
+        feederWheel = 422;
+
+        leftClimber = 422;
+        rightClimber = 422;
+
+        intakeExtensionIn = 0;
+        intakeExtensionOut = 1;
     }
+}
 
     /**
      * @return The speed cap for the drive base in teleop.

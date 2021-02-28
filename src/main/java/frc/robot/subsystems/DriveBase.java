@@ -88,6 +88,22 @@ public class DriveBase extends SubsystemBase {
             this.leftSide = new SpeedControllerGroup(leftMiddleMaster, leftFrontFollowerVictor, leftRearFollowerVictor);
             this.rightSide = new SpeedControllerGroup(rightMiddleMaster, rightFrontFollowerVictor, rightRearFollowerVictor);
     
+        } else if (RobotMap.botName == RobotMap.BotNames.PBOT20){
+            //2020's PBOT (42D2)
+            this.leftMiddleMaster = new WPI_TalonSRX(RobotMap.leftMiddleMaster);
+            this.rightMiddleMaster = new WPI_TalonSRX(RobotMap.rightMiddleMaster); 
+            this.leftFrontFollowerVictor = new WPI_VictorSPX(RobotMap.leftFrontFollower);
+            this.leftRearFollowerVictor = new WPI_VictorSPX(RobotMap.leftRearFollower);
+            this.rightFrontFollowerVictor = new WPI_VictorSPX(RobotMap.rightFrontFollower);
+            this.rightRearFollowerVictor = new WPI_VictorSPX(RobotMap.rightRearFollower);
+
+            leftFrontFollowerVictor.setInverted(true);
+            leftMiddleMaster.setInverted(true);
+            leftRearFollowerVictor.setInverted(true);
+
+            this.leftSide = new SpeedControllerGroup(leftMiddleMaster, leftFrontFollowerVictor, leftRearFollowerVictor);
+            this.rightSide = new SpeedControllerGroup(rightMiddleMaster, rightFrontFollowerVictor, rightRearFollowerVictor);
+
         }
 
         // this.gyro = new ADIS16470_IMU();
