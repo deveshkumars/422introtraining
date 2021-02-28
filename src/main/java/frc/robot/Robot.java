@@ -20,7 +20,7 @@ public class Robot extends TimedRobot {
 
     public void robotInit() {
         //Choose from AXIDRIVE (Axiom drivebase), TOASTER, PBOT20 (42D2), and COMPETITION
-        RobotMap.setBot(RobotMap.BotNames.TOASTER);
+        RobotMap.setBot(RobotMap.BotNames.COMPETITION);
         System.out.println("Initializing" + RobotMap.botName);
 
         //drive settings
@@ -68,11 +68,11 @@ public class Robot extends TimedRobot {
 
         // Left joystick - intake & transversal
         if (UserInterface.operatorController.getLeftJoystickY() >= 0.4) {
-            Subsystems.intake.setIntakeMotors(0.5);
-            Subsystems.transversal.setTransversalMotors(0.5);
+            Subsystems.intake.setIntakeMotors(0.8);
+            Subsystems.transversal.setTransversalMotors(0.8);
         } else if (UserInterface.operatorController.getLeftJoystickY() <= -0.4) {
-            Subsystems.intake.setIntakeMotors(-0.5);
-            Subsystems.transversal.setTransversalMotors(-0.5);
+            Subsystems.intake.setIntakeMotors(-0.8);
+            Subsystems.transversal.setTransversalMotors(-0.8);
         } else {
             Subsystems.intake.stopIntakeMotors();
             Subsystems.transversal.stopTransversalMotors();

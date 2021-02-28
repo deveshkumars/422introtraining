@@ -63,17 +63,17 @@ public class RobotMap {
     public static void setBot(BotNames bot) {
         botName = bot;
         if (bot == BotNames.COMPETITION) {
-            leftFrontFollower = 422;
-            leftMiddleMaster = 422;
-            leftRearFollower = 422;
-            rightFrontFollower = 422;
-            rightMiddleMaster = 422;
-            rightRearFollower = 422;
+            leftFrontFollower = 7;
+            leftMiddleMaster = 29;
+            leftRearFollower = 8;
+            rightFrontFollower = 9;
+            rightMiddleMaster = 58;
+            rightRearFollower = 45;
             wheelDiameter = 6;
 
             leftFlywheel = 422;
             rightFlywheel = 422;
-            intakeMotor = 422;
+            intakeMotor = 32;
             bottomBelt = 422;
             middleBelt = 422;
             feederWheel = 422;
@@ -82,7 +82,7 @@ public class RobotMap {
             rightClimber = 422;
 
             intakeExtensionIn = 0;
-            intakeExtensionOut = 1;
+            intakeExtensionOut = 7;
         } else if (bot == BotNames.TOASTER){
             leftMiddleMaster = 2;
             leftFrontFollower = 3;

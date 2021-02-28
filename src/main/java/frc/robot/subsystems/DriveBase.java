@@ -50,8 +50,9 @@ public class DriveBase extends SubsystemBase {
             this.rightFrontFollowerTalon = new WPI_TalonSRX(RobotMap.rightFrontFollower);
             this.rightRearFollowerTalon = new WPI_TalonSRX(RobotMap.rightRearFollower);
     
-            // leftFrontFollowerTalon.setInverted(true);
-            // leftRearFollowerTalon.setInverted(true);
+            leftFrontFollowerTalon.setInverted(true);
+            leftMiddleMaster.setInverted(true);
+            leftRearFollowerTalon.setInverted(true);
     
             this.leftSide = new SpeedControllerGroup(leftMiddleMaster, leftFrontFollowerTalon, leftRearFollowerTalon);
             this.rightSide = new SpeedControllerGroup(rightMiddleMaster, rightFrontFollowerTalon, rightRearFollowerTalon);
