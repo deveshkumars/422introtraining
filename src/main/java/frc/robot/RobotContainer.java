@@ -12,14 +12,11 @@ import edu.wpi.first.wpilibj.trajectory.TrajectoryGenerator;
 import edu.wpi.first.wpilibj.trajectory.constraint.DifferentialDriveVoltageConstraint;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RamseteCommand;
-import frc.robot.subsystems.DriveBase;
+import frc.robot.subsystems.Subsystems;
 import frc.robot.RobotMap;
 import java.util.List;
  
 public class RobotContainer {
-  private final DriveBase robotDrive = new DriveBase();
- 
-  public RobotContainer() {}
  
   public Command getAutonomousCommand() {
       var autoVoltageConstraint =
@@ -49,21 +46,21 @@ public class RobotContainer {
        RamseteCommand ramseteCommand =
            new RamseteCommand(
                traj,
-               robotDrive::getPose,
+               Subsystems.driveBase::getPose,
                new RamseteController(RobotMap.kRamseteB, RobotMap.kRamseteZeta),
                new SimpleMotorFeedforward(
                    RobotMap.ksVolts,
                    RobotMap.kvVoltSecondsPerMeter,
                    RobotMap.kaVoltSecondsSquaredPerMeter),
                RobotMap.kDriveKinematics,
-               robotDrive::getWheelSpeeds,
+               Subsystems.driveBase::getWheelSpeeds,
                new PIDController(RobotMap.kPDriveVel, 0, 0),
                new PIDController(RobotMap.kPDriveVel, 0, 0),
-               robotDrive::tankDriveVolts,
-               robotDrive);
+               Subsystems.driveBase::tankDriveVolts,
+               Subsystems.driveBase);
  
-       robotDrive.resetOdometry(traj.getInitialPose());
+       Subsystems.driveBase.resetOdometry(traj.getInitialPose());
  
-       return ramseteCommand.andThen(() -> robotDrive.tankDriveVolts(0, 0));
+       return ramseteCommand.andThen(() -> Subsystems.driveBase.tankDriveVolts(0, 0));
   }
 }
