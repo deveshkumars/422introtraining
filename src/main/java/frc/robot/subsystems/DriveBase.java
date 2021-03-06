@@ -1,5 +1,6 @@
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
@@ -45,17 +46,20 @@ public class DriveBase extends SubsystemBase {
             //Practice/comp bot
             this.leftMiddleMaster = new WPI_TalonSRX(RobotMap.leftMiddleMaster);
             this.rightMiddleMaster = new WPI_TalonSRX(RobotMap.rightMiddleMaster);
-            this.leftFrontFollowerTalon = new WPI_TalonSRX(RobotMap.leftFrontFollower);
-            this.leftRearFollowerTalon = new WPI_TalonSRX(RobotMap.leftRearFollower);
-            this.rightFrontFollowerTalon = new WPI_TalonSRX(RobotMap.rightFrontFollower);
-            this.rightRearFollowerTalon = new WPI_TalonSRX(RobotMap.rightRearFollower);
+            this.leftFrontFollowerVictor = new WPI_VictorSPX(RobotMap.leftFrontFollower);
+            this.leftRearFollowerVictor = new WPI_VictorSPX(RobotMap.leftRearFollower);
+            this.rightFrontFollowerVictor = new WPI_VictorSPX(RobotMap.rightFrontFollower);
+            this.rightRearFollowerVictor = new WPI_VictorSPX(RobotMap.rightRearFollower);
     
-            leftFrontFollowerTalon.setInverted(true);
-            leftMiddleMaster.setInverted(true);
-            leftRearFollowerTalon.setInverted(true);
+            leftFrontFollowerVictor.setInverted(false);
+            leftMiddleMaster.setInverted(false);
+            leftRearFollowerVictor.setInverted(false);
+            rightFrontFollowerVictor.setInverted(false);
+            rightMiddleMaster.setInverted(false);
+            rightRearFollowerVictor.setInverted(false);
     
-            this.leftSide = new SpeedControllerGroup(leftMiddleMaster, leftFrontFollowerTalon, leftRearFollowerTalon);
-            this.rightSide = new SpeedControllerGroup(rightMiddleMaster, rightFrontFollowerTalon, rightRearFollowerTalon);
+            this.leftSide = new SpeedControllerGroup(leftMiddleMaster, leftFrontFollowerVictor, leftRearFollowerVictor);
+            this.rightSide = new SpeedControllerGroup(rightMiddleMaster, rightFrontFollowerVictor, rightRearFollowerVictor);
     
         } else if (RobotMap.botName == RobotMap.BotNames.TOASTER) {
             //Toaster

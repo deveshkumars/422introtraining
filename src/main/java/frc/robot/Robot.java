@@ -67,11 +67,11 @@ public class Robot extends TimedRobot {
     public void teleopPeriodic() {
 
         // Left joystick - intake & transversal
-        if (UserInterface.operatorController.getLeftJoystickY() >= 0.4) {
-            Subsystems.intake.setIntakeMotors(0.8);
+        if (UserInterface.operatorController.getRightJoystickY() >= 0.4) {
+            Subsystems.intake.setIntakeMotors(0.9);
             Subsystems.transversal.setTransversalMotors(0.8);
-        } else if (UserInterface.operatorController.getLeftJoystickY() <= -0.4) {
-            Subsystems.intake.setIntakeMotors(-0.8);
+        } else if (UserInterface.operatorController.getRightJoystickY() <= -0.4) {
+            Subsystems.intake.setIntakeMotors(-0.9);
             Subsystems.transversal.setTransversalMotors(-0.8);
         } else {
             Subsystems.intake.stopIntakeMotors();

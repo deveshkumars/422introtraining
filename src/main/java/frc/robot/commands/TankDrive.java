@@ -26,9 +26,9 @@ public class TankDrive extends CommandBase {
         /* Sets throttle for driveBase to the left stick Y-axis and sets the rotation
         * for driveBase to the right stick X-axis on on the driverXboxController */
         if (UserInterface.driverController.getRightJoystickY() < -0.1) {
-            speed = (Math.pow(UserInterface.driverController.getRightJoystickY(), 2));
-        } else if (UserInterface.driverController.getRightJoystickY() > 0.1) {
             speed = -(Math.pow(UserInterface.driverController.getRightJoystickY(), 2));
+        } else if (UserInterface.driverController.getRightJoystickY() > 0.1) {
+            speed = (Math.pow(UserInterface.driverController.getRightJoystickY(), 2));
         } else {
             speed = 0;
         }
@@ -58,6 +58,6 @@ public class TankDrive extends CommandBase {
         /*  Because of a weird glitch with how curvatureDrive is set up,
          *  the rotation actually goes in as the first input, followed by the speed,
          *  rather than speed then rotation */
-        Subsystems.driveBase.cheesyDrive.curvatureDrive(RobotMap.getRotationCap() * rotation, RobotMap.getSpeedCap() * speed, true);
+        Subsystems.driveBase.cheesyDrive.curvatureDrive(RobotMap.getSpeedCap() * speed, RobotMap.getRotationCap() * rotation, true);
     }
 }

@@ -63,12 +63,12 @@ public class RobotMap {
     public static void setBot(BotNames bot) {
         botName = bot;
         if (bot == BotNames.COMPETITION) {
-            leftFrontFollower = 7;
-            leftMiddleMaster = 29;
-            leftRearFollower = 8;
-            rightFrontFollower = 9;
-            rightMiddleMaster = 58;
-            rightRearFollower = 45;
+            rightFrontFollower = 7;
+            rightMiddleMaster = 29;
+            rightRearFollower = 8;
+            leftFrontFollower = 9;
+            leftMiddleMaster = 58;
+            leftRearFollower = 45;
             wheelDiameter = 6;
 
             leftFlywheel = 422;

@@ -17,8 +17,10 @@ public class IntakeToggle extends CommandBase {
     public void initialize() {
         if (RobotMap.isIntakeDown) {
             Subsystems.intake.intakeRetract();
+            System.out.println("intake retract");
         } else {
             Subsystems.intake.intakeExtend();
+            System.out.println("intake extend");
         }
         RobotMap.isIntakeDown = !RobotMap.isIntakeDown;
     }
