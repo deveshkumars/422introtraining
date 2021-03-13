@@ -23,7 +23,7 @@ public class Robot extends TimedRobot {
 
         //Choose from AXIDRIVE (Axiom drivebase), TOASTER, and COMPETITION
         RobotMap.setBot(RobotMap.BotNames.AXIDRIVE);
-        System.out.println("Initializing" + RobotMap.botName);
+        System.out.println("Initializing " + RobotMap.botName);
 
         //drive settings
         Subsystems.driveBase.setDefaultCommand(new TankDrive());

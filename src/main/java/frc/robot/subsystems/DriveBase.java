@@ -23,10 +23,10 @@ public class DriveBase extends SubsystemBase {
  
     public WPI_TalonSRX leftMiddleMaster;
     public WPI_TalonSRX rightMiddleMaster;
-    public WPI_VictorSPX leftFrontFollower;
-    public WPI_VictorSPX leftRearFollower;
-    public WPI_VictorSPX rightFrontFollower;
-    public WPI_VictorSPX rightRearFollower;
+    public WPI_TalonSRX leftFrontFollower;
+    public WPI_TalonSRX leftRearFollower;
+    public WPI_TalonSRX rightFrontFollower;
+    public WPI_TalonSRX rightRearFollower;
     
     public Gyro gyro;
     private SpeedControllerGroup leftSide;
@@ -42,10 +42,10 @@ public class DriveBase extends SubsystemBase {
         this.leftMiddleMaster = new WPI_TalonSRX(RobotMap.leftMiddleMaster);
         this.rightMiddleMaster = new WPI_TalonSRX(RobotMap.rightMiddleMaster);
 
-        this.leftFrontFollower = new WPI_VictorSPX(RobotMap.leftFrontFollower);
-        this.leftRearFollower = new WPI_VictorSPX(RobotMap.leftRearFollower);
-        this.rightFrontFollower = new WPI_VictorSPX(RobotMap.rightFrontFollower);
-        this.rightRearFollower = new WPI_VictorSPX(RobotMap.rightRearFollower);
+        this.leftFrontFollower = new WPI_TalonSRX(RobotMap.leftFrontFollower);
+        this.leftRearFollower = new WPI_TalonSRX(RobotMap.leftRearFollower);
+        this.rightFrontFollower = new WPI_TalonSRX(RobotMap.rightFrontFollower);
+        this.rightRearFollower = new WPI_TalonSRX(RobotMap.rightRearFollower);
 
         leftFrontFollower.follow(leftMiddleMaster);
         leftRearFollower.follow(leftMiddleMaster);
@@ -56,7 +56,7 @@ public class DriveBase extends SubsystemBase {
         leftFrontFollower.setInverted(true);
         leftRearFollower.setInverted(true);
     
-        this.gyro = new ADXRS450_Gyro();
+        this.gyro = new ADXRS450_Gyro(kGyroPort);
     
         // zeroEncoderPosition(); // test this out in case it works
         leftMotorTicks = leftMiddleMaster.getSelectedSensorPosition(0);
