@@ -68,14 +68,21 @@ public class Robot extends TimedRobot {
 
         // Left joystick - intake & transversal
         if (UserInterface.operatorController.getRightJoystickY() >= 0.4) {
-            Subsystems.intake.setIntakeMotors(0.9);
+            Subsystems.intake.setIntakeMotors(0.95);
             Subsystems.transversal.setTransversalMotors(0.8);
         } else if (UserInterface.operatorController.getRightJoystickY() <= -0.4) {
-            Subsystems.intake.setIntakeMotors(-0.9);
+            Subsystems.intake.setIntakeMotors(-0.95);
             Subsystems.transversal.setTransversalMotors(-0.8);
         } else {
             Subsystems.intake.stopIntakeMotors();
             Subsystems.transversal.stopTransversalMotors();
+        }
+
+        if (UserInterface.operatorController.getLeftJoystickY() >= 0.4) {
+            Subsystems.transversal.setTransversalMotors(0.8);
+        } else if (UserInterface.operatorController.getLeftJoystickY() <= -0.4) {
+            Subsystems.transversal.setTransversalMotors(-0.8);
+        } else {
         }
 
         // Left trigger - hold for warmup flywheel

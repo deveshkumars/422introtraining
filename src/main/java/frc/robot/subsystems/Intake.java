@@ -18,6 +18,7 @@ public class Intake extends SubsystemBase {
         setSubsystem("Intake");
         this.intakeMotor = new WPI_TalonSRX(RobotMap.intakeMotor);
         this.intakeExtension = new DoubleSolenoid(RobotMap.intakeExtensionOut, RobotMap.intakeExtensionIn);
+        intakeMotor.setInverted(true);
     }
 
     /**

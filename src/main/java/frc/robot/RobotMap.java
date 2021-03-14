@@ -74,7 +74,7 @@ public class RobotMap {
             leftFlywheel = 422;
             rightFlywheel = 422;
             intakeMotor = 32;
-            bottomBelt = 422;
+            bottomBelt = 12;
             middleBelt = 422;
             feederWheel = 422;
 
