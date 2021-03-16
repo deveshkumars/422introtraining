@@ -66,6 +66,16 @@ public class Robot extends TimedRobot {
 
     public void teleopPeriodic() {
 
+        //X,Y buttons - Climber
+        if (UserInterface.operatorController.getYButton()) {
+            Subsystems.climber.extendClimber(0.5);
+        } else if (UserInterface.operatorController.getXButton()) {
+            Subsystems.climber.retractClimber(0.5);
+        } else {
+            Subsystems.climber.stopClimber();
+        }
+
+
         // Left joystick - intake & transversal
         if (UserInterface.operatorController.getRightJoystickY() >= 0.4) {
             Subsystems.intake.setIntakeMotors(0.95);
@@ -82,7 +92,6 @@ public class Robot extends TimedRobot {
             Subsystems.transversal.setTransversalMotors(0.8);
         } else if (UserInterface.operatorController.getLeftJoystickY() <= -0.4) {
             Subsystems.transversal.setTransversalMotors(-0.8);
-        } else {
         }
 
         // Left trigger - hold for warmup flywheel
@@ -103,14 +112,14 @@ public class Robot extends TimedRobot {
         }
         oldRightTriggerOn = isRightTriggerOn;
 
-        // D-Pad - climb
+        // D-Pad - CellStop control
         int direction = UserInterface.operatorController.getPOVAngle();
-        if (direction == 0) { //DPad up
-            Subsystems.climber.extendClimber(0.5);
-        } else if (direction == 180) { // DPad down
-            Subsystems.climber.retractClimber(0.5);
-        } else {
-            Subsystems.climber.stopClimber();
+        if (direction == 0) {
+            Subsystems.cellStop.feedBalls(0.5);
+        }  else if (direction == 180) {
+            Subsystems.cellStop.feedBalls(-0.5);
+        } else if (!isRightTriggerOn) {
+            Subsystems.cellStop.stopFeed();
         }
     }
 }
