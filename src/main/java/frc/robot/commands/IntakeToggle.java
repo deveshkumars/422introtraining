@@ -28,5 +28,4 @@ public class IntakeToggle extends CommandBase {
     public boolean isFinished() {
         return true;
     }
-
 }

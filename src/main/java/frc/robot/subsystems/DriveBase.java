@@ -131,6 +131,22 @@ public class DriveBase extends SubsystemBase {
     }
 
     /**
+     * Sets the left side drive train motors
+     * @param left Left side motors' velocity (-1 to 1)
+     */
+    public void setLeftMotors(double left) {
+        leftSide.set(left);
+    }
+
+    /**
+     * Sets the right side drive train motors
+     * @param right Right side motors' velocity (-1 to 1)
+     */
+    public void setRightMotors(double right) {
+        rightSide.set(right);
+    }
+
+    /**
      * Sets drive train motors to zero, effectively stopping the bot.
      */
     public void stopMotors() {
