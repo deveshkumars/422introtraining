@@ -89,9 +89,9 @@ public class Robot extends TimedRobot {
         }
 
         if (UserInterface.operatorController.getLeftJoystickY() >= 0.4) {
-            Subsystems.transversal.setTransversalMotors(0.8);
-        } else if (UserInterface.operatorController.getLeftJoystickY() <= -0.4) {
             Subsystems.transversal.setTransversalMotors(-0.8);
+        } else if (UserInterface.operatorController.getLeftJoystickY() <= -0.4) {
+            Subsystems.transversal.setTransversalMotors(0.8);
         }
 
         // Left trigger - hold for warmup flywheel
