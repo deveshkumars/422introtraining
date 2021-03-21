@@ -9,7 +9,7 @@ public class Circle extends CommandBase {
     private double radius;
     private double angle;
 
-    private double maxSpeed = 0.8;
+    private double maxSpeed = 0.4;
     private double otherSpeed;
     
     /**
@@ -24,7 +24,7 @@ public class Circle extends CommandBase {
     }
 
     public void initialize() {
-        driveBase.zeroGyroAngle();
+        Subsystems.driveBase.zeroGyroAngle();
     }
 
     public void execute() {
@@ -32,16 +32,26 @@ public class Circle extends CommandBase {
     }
 
     public boolean isFinished() {
-        return (driveBase.getGyroAngle() > this.angle);
+        if (angle>0) {
+            return (Subsystems.driveBase.getGyroAngle() > this.angle);
+        } else {
+            return (Subsystems.driveBase.getGyroAngle() < this.angle);
+        }
+        
     }
     
     private void setSpeeds() {
-        otherSpeed = (maxSpeed / (radius + (RobotMap.robotWidth / 2))) * (radius - (RobotMap.robotWidth / 2));
+        if(radius > 0){
+            otherSpeed = (maxSpeed / (radius + (RobotMap.robotWidth / 2))) * (radius - (RobotMap.robotWidth / 2));
+        } else {
+            otherSpeed = (maxSpeed / (radius - (RobotMap.robotWidth / 2))) * (radius + (RobotMap.robotWidth / 2));
+        }
         
         if (radius > 0) {
-            driveBase.setMotors(maxSpeed, otherSpeed);
+            Subsystems.driveBase.setMotors(-maxSpeed, -otherSpeed);
         } else {
-            driveBase.setMotors(otherSpeed, maxSpeed);
+            Subsystems.driveBase.setMotors(-otherSpeed, -maxSpeed);        
         }
+        System.out.println(Subsystems.driveBase.getGyroAngle());
     }
 }
