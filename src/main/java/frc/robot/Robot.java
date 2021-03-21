@@ -2,7 +2,9 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+// import edu.wpi.first.wpilibj2.command.ScheduleCommand;
 import frc.robot.commands.*;
+import frc.robot.commands.autonomous.Autonomous;
 import frc.robot.userinterface.UserInterface;
 import frc.robot.subsystems.*;
 
@@ -20,7 +22,7 @@ public class Robot extends TimedRobot {
 
     public void robotInit() {
         //Choose from AXIDRIVE (Axiom drivebase), TOASTER, PBOT20 (42D2), and COMPETITION
-        RobotMap.setBot(RobotMap.BotNames.COMPETITION);
+        RobotMap.setBot(RobotMap.BotNames.PBOT20);
         System.out.println("Initializing" + RobotMap.botName);
 
         //drive settings
@@ -55,6 +57,7 @@ public class Robot extends TimedRobot {
         CommandScheduler.getInstance().cancelAll();
 
         // Schedule autonomous command to run
+        new Autonomous().schedule();
     }
 
     public void autonomousPeriodic() {}
