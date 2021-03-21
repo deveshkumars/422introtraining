@@ -21,6 +21,7 @@ public class Circle extends CommandBase {
         addRequirements(Subsystems.driveBase);
         this.radius = radius;
         this.angle = angle;
+        if (radius < 0 && angle > 0) { angle *= -1; }
     }
 
     public void initialize() {
