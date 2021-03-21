@@ -2,7 +2,6 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-// import edu.wpi.first.wpilibj2.command.ScheduleCommand;
 import frc.robot.commands.*;
 import frc.robot.commands.autonomous.Autonomous;
 import frc.robot.userinterface.UserInterface;
@@ -57,7 +56,8 @@ public class Robot extends TimedRobot {
         CommandScheduler.getInstance().cancelAll();
 
         // Schedule autonomous command to run
-        new Autonomous().schedule();
+        ShuffleboardControl.setAutonomous();
+        ShuffleboardControl.getAutonomous().schedule();
     }
 
     public void autonomousPeriodic() {}

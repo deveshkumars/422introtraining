@@ -9,10 +9,13 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import frc.robot.subsystems.Subsystems;
 import frc.robot.userinterface.UserInterface;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import frc.robot.commands.autonomous.Autonomous;
 
 public class ShuffleboardControl {
 
-    private static SendableChooser<String> autoChooserWidget;
+    private static Autonomous auto;
+
+    private static SendableChooser<Autonomous.Path> autoChooserWidget;
     private static NetworkTableEntry selectedAutoLabelWidget;
     private static NetworkTableEntry autoSetupSuccessfulWidget;
     private static NetworkTableEntry pathWidget;
@@ -52,7 +55,10 @@ public class ShuffleboardControl {
 
         // Setup autonomous tab
 
-        autoChooserWidget = new SendableChooser<String>();
+        autoChooserWidget = new SendableChooser<Autonomous.Path>();
+        for (Autonomous.Path path : Autonomous.Path.values()) {
+            autoChooserWidget.addOption(path.toString(), path);
+        }
 
         chooseAutoLayout.add("Browse autos", autoChooserWidget)
             .withWidget(BuiltInWidgets.kComboBoxChooser)
@@ -168,42 +174,44 @@ public class ShuffleboardControl {
         buttons[8] = Math.abs(UserInterface.operatorController.getLeftJoystickX()) > 0.1 || Math.abs(UserInterface.operatorController.getLeftJoystickY()) > 0.1;
         buttons[9] = Math.abs(UserInterface.operatorController.getRightJoystickX()) > 0.1 || Math.abs(UserInterface.operatorController.getRightJoystickY()) > 0.1;
         operatorControllerWidget.setBooleanArray(buttons);
+
+        //auto
+        setAutonomous();
     }
 
 
     // AUTONOMOUS
 
     /**
-     * TODO: Sets the current autonomous to the specified named path.
+     * Sets the current autonomous to the specified path.
      */
-    public static void setAutonomous(String name) {
-        // try {
-        //     autonomous = new Autonomous(filename);
-        //     pathWidget.setDoubleArray(autonomous.path);
-        //     autoSetupSuccessfulWidget.setBoolean(true);
-        //     selectedAutoLabelWidget.setString(getNameFromFile(filename));
-        // } catch (IOException e) {
-        //     selectedAutoLabelWidget.setString("File " + filename + " not found or other I/O error");
-        //     autoSetupSuccessfulWidget.setBoolean(false);
-        //     e.printStackTrace();
-        //     try {
-        //         autonomous = new Autonomous();
-        //     } catch (IOException e1) {
-        //         selectedAutoLabelWidget.setString("Neither selected file " + filename + " nor default file " + Autonomous.defaultPath + " found or other I/O error");
-        //         e1.printStackTrace();
-        //     }
-        // }
+    public static void setAutonomous(Autonomous.Path path) {
+        try {
+            auto = new Autonomous(path);
+            autoSetupSuccessfulWidget.setBoolean(true);
+            selectedAutoLabelWidget.setString(path.toString());
+        } catch (Error e) {
+            selectedAutoLabelWidget.setString("Autonomous '" + path + "' not found. Setting to default path '" + Autonomous.defaultAuto + "'.");
+            autoSetupSuccessfulWidget.setBoolean(false);
+            e.printStackTrace();
+            try {
+                auto = new Autonomous(Autonomous.defaultAuto);
+            } catch (Error e1) {
+                selectedAutoLabelWidget.setString("Neither selected auto '" + path + "'' nor default auto '" + Autonomous.defaultAuto + "' found. Do not run.");
+                e1.printStackTrace();
+            }
+        }
     }
 
     /**
      * Sets the current autonomous to the choice selected in Shuffleboard.
      */
     public static void setAutonomous() {
-        setAutonomous(autoChooserWidget.getSelected());
+        if (auto == null || auto.path != autoChooserWidget.getSelected()) setAutonomous(autoChooserWidget.getSelected());
     }
 
-    // public static Autonomous getAutonomous() {
-    //     return autonomous;
-    // }
+    public static Autonomous getAutonomous() {
+        return auto;
+    }
 
 }
