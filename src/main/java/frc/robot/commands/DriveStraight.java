@@ -1,8 +1,8 @@
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotMap;
-import frc.robot.RobotMap;
-import frc.robot.subsystems;
+import frc.robot.subsystems.*;
 
 public class DriveStraight extends CommandBase {
     private double ticks;
@@ -13,7 +13,7 @@ public class DriveStraight extends CommandBase {
         setName("DriveStraight");
         addRequirements(Subsystems.driveBase);
         this.ticks = RobotMap.convertToTicks(inches);
-        this.foward = inches > 0;
+        this.forward = inches > 0;
         this.speed = speed;
     }
     
@@ -28,10 +28,10 @@ public class DriveStraight extends CommandBase {
         correction *= 0.05;
         correction += 1.0;
 
-        if (this.forward) {
-            Subsystems.driveBase.setMotors(this.speed, this.speed * correction);
+        if (forward) {
+            Subsystems.driveBase.setMotors(-this.speed, -this.speed * correction);
         } else {
-            Subsystems.driveBase.setMotors(-this.speed * correction, -this.speed);
+            Subsystems.driveBase.setMotors(this.speed * correction, this.speed);
         }
     }
 
