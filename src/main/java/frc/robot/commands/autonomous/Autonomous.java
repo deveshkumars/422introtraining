@@ -22,5 +22,18 @@ public class Autonomous extends SequentialCommandGroup {
             addCommands(new Circle(-18, -225));
             addCommands(new DriveStraight(230,0.6)); //260 is a placeholder
         }
+        
+        //addCommands(new Turn(-28, 0.4)); //turn to line up with first gap
+                // addCommands(new DriveStraight(87, 0.4)); //drive through first gap
+                // addCommands(new Turn(28, 0.4)); //turn to be parallel with line of cones
+                // addCommands(new DriveStraight(120, 0.4)); //drive to end of line of cones
+                // addCommands(new Turn(28, 0.4)); //turn to line up with second gap
+                // addCommands(new DriveStraight(33.98, 0.4)); //drive to tangent point with circle around last cone
+                // addCommands(new Circle(30, 360)); //drive circle around last cone
+                // addCommands(new DriveStraight(33.98, 0.4)); //drive from circle to start of line of cones
+                // addCommands(new Turn (28, 0.4)); //turn to be parallel with line of cones
+                // addCommands(new DriveStraight(120, 0.4)); //drive to end of line of cones
+                // addCommands(new Turn(28, 0.4)); //turn to line up with end position
+                // addCommands(new DriveStraight(87, 0.4)); //drive to end position
     }
 }
