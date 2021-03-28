@@ -55,13 +55,15 @@ public class Autonomous extends SequentialCommandGroup {
                 addCommands(new Circle(-30, 90));
                 break;
             case BOUNCE: //center halfway between B2 and D2
-                addCommands(new Turn(-56.31, 0.4)); //(turn to face A3 head-on) (-90 + arctan(30/45))
-                addCommands(new DriveStraight(54.1, 0.6)); //sqrt(30²+45²), must contact
-                // addCommands(new Turn()); //(turn to face 7 inches beyond D5)
-                addCommands(new DriveStraight(114.1,0.6)); //sqrt((90+7)²+60²), cannot contact
-                // addCommands(new Turn()); //turn to face
-                addCommands(new DriveStraight(55, 0.4)); //sqrt(30²+(60+7)²), cannot contact
-                break;
+                addCommand( new Circle(30,90));
+                addCommand(new DriveStraight(30,0.4));
+                addCommands(new Turn(-20,.4));
+                addCommands(new DriveStraight(-105, .4));
+                addCommands(new Circle(-30,160));
+                addCommands(new DriveStraight(-90,.4));
+                addCommand (new turn(-95));
+                addCommand(new drivetraight (-42.42, 0.4))
+
         }
         
         //addCommands(new Turn(-28, 0.4)); //turn to line up with first gap
