@@ -1,4 +1,6 @@
 package frc.robot;
+import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.networktables.*;
 
 /**
  * Ports for motor controllers, caps for speed and rotation, booleans for toggles, and turn direction.
@@ -51,6 +53,10 @@ public class RobotMap {
 
     public static final int driverXboxController = 1;
     public static final int operatorXboxController = 2;
+
+    //CameraSever and NetworkTable
+    public static CameraServer csinst;
+    public static NetworkTableInstance ntinst;
 
     public enum BotNames {
         COMPETITION, TOASTER, AXIDRIVE, PBOT20
@@ -153,6 +159,10 @@ public class RobotMap {
         intakeExtensionIn = 0;
         intakeExtensionOut = 1;
     }
+
+    //set up  networktables
+    csinst = CameraServer.getInstance();
+    ntinst = NetworkTableInstance.getDefault();
 }
 
     /**

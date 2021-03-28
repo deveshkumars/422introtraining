@@ -11,5 +11,6 @@ public class Subsystems {
     public static final Flyboi flyboi = new Flyboi();
     public static final Intake intake = new Intake();
     public static final Transversal transversal = new Transversal();
+    public static final Vision vision = new Vision();
     
 }

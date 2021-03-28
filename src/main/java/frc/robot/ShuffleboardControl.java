@@ -186,17 +186,18 @@ public class ShuffleboardControl {
      * Sets the current autonomous to the specified path.
      */
     public static void setAutonomous(Autonomous.Path path) {
+        if(path == null) path = Autonomous.defaultAuto;
         try {
             auto = new Autonomous(path);
             autoSetupSuccessfulWidget.setBoolean(true);
             selectedAutoLabelWidget.setString(path.toString());
-        } catch (Error e) {
+        } catch (Exception e) {
             selectedAutoLabelWidget.setString("Autonomous '" + path + "' not found. Setting to default path '" + Autonomous.defaultAuto + "'.");
             autoSetupSuccessfulWidget.setBoolean(false);
             e.printStackTrace();
             try {
                 auto = new Autonomous(Autonomous.defaultAuto);
-            } catch (Error e1) {
+            } catch (Exception e1) {
                 selectedAutoLabelWidget.setString("Neither selected auto '" + path + "'' nor default auto '" + Autonomous.defaultAuto + "' found. Do not run.");
                 e1.printStackTrace();
             }
