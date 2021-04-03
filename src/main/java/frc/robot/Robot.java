@@ -2,6 +2,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.RobotMap.ControlScheme;
 import frc.robot.commands.*;
 import frc.robot.userinterface.UserInterface;
 import frc.robot.subsystems.*;
@@ -23,16 +24,8 @@ public class Robot extends TimedRobot {
         RobotMap.setBot(RobotMap.BotNames.COMPETITION);
         System.out.println("Initializing" + RobotMap.botName);
 
-        //drive settings
-        Subsystems.driveBase.setDefaultCommand(new TankDrive());
-        Subsystems.driveBase.cheesyDrive.setSafetyEnabled(false);
-
-        //driver controls (buttons)
-        UserInterface.driverController.RB.whenPressed(new SlowFast());
-
-        //operator controls (buttons)
-        UserInterface.operatorController.LB.whileHeld(new Vomit());
-        UserInterface.operatorController.RB.whenPressed(new IntakeToggle());
+        RobotMap.setControlScheme(ControlScheme.WIIDRIVE);
+        System.out.print("Control scheme set to "+RobotMap.controlScheme);
         
         ShuffleboardControl.layoutShuffleboard();
     }

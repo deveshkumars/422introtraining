@@ -1,5 +1,9 @@
 package frc.robot;
 
+import frc.robot.subsystems.*;
+import frc.robot.userinterface.UserInterface;
+import frc.robot.commands.*;
+
 /**
  * Ports for motor controllers, caps for speed and rotation, booleans for toggles, and turn direction.
  */
@@ -49,6 +53,7 @@ public class RobotMap {
 
     public static final int driverXboxController = 1;
     public static final int operatorXboxController = 2;
+    public static final int wiimoteController = 3;
 
     public enum BotNames {
         COMPETITION, TOASTER, AXIDRIVE, PBOT20
@@ -56,6 +61,10 @@ public class RobotMap {
 
     public static BotNames botName;
 
+    public enum ControlScheme {
+        TANKDRIVE, WIIDRIVE
+    }
+    public static ControlScheme controlScheme;
     /**
      * Sets the bot's ports based off of the bot's name. No further robot-specific setting is needed.
      * @param bot The name of the bot.
@@ -128,30 +137,63 @@ public class RobotMap {
             intakeExtensionIn = 0;
             intakeExtensionOut = 1;
         }else if (bot == BotNames.PBOT20){
-        //jenkyboi tm
-        leftMiddleMaster = 34;
-        leftFrontFollower = 3;
-        leftRearFollower = 6;
-        rightMiddleMaster = 31;
-        rightFrontFollower = 5; 
-        rightRearFollower = 4;
+            //jenkyboi tm
+            leftMiddleMaster = 34;
+            leftFrontFollower = 3;
+            leftRearFollower = 6;
+            rightMiddleMaster = 31;
+            rightFrontFollower = 5; 
+            rightRearFollower = 4;
 
-        wheelDiameter = 6;
+            wheelDiameter = 6;
 
-        leftFlywheel = 422;
-        rightFlywheel = 422;
-        intakeMotor = 422;
-        bottomBelt = 422;
-        middleBelt = 422;
-        feederWheel = 422;
+            leftFlywheel = 422;
+            rightFlywheel = 422;
+            intakeMotor = 422;
+            bottomBelt = 422;
+            middleBelt = 422;
+            feederWheel = 422;
 
-        leftClimber = 422;
-        rightClimber = 422;
+            leftClimber = 422;
+            rightClimber = 422;
 
-        intakeExtensionIn = 0;
-        intakeExtensionOut = 1;
+            intakeExtensionIn = 0;
+            intakeExtensionOut = 1;
+        }
     }
-}
+
+    public static void setControlScheme(ControlScheme control){
+        controlScheme = control;
+
+        
+        if (controlScheme == ControlScheme.TANKDRIVE){
+            //drive settings
+        
+            Subsystems.driveBase.setDefaultCommand(new TankDrive());
+            Subsystems.driveBase.cheesyDrive.setSafetyEnabled(false);
+
+            //driver controls (buttons)
+            UserInterface.driverController.RB.whenPressed(new SlowFast());
+
+            //operator controls (buttons)
+            UserInterface.operatorController.LB.whileHeld(new Vomit());
+            UserInterface.operatorController.RB.whenPressed(new IntakeToggle());
+
+        }
+        else if (controlScheme == ControlScheme.WIIDRIVE){
+
+            //WiiMote drive settings
+            Subsystems.driveBase.setDefaultCommand(new WiiDrive());
+            Subsystems.driveBase.cheesyDrive.setSafetyEnabled(false);
+
+            //wiimote controls (buttons)
+            UserInterface.wiimoteController.A.whenPressed(new SlowFast());
+
+            //operator controls (buttons)
+            UserInterface.operatorController.LB.whileHeld(new Vomit());
+            UserInterface.operatorController.RB.whenPressed(new IntakeToggle());
+        }
+    }
 
     /**
      * @return The speed cap for the drive base in teleop.

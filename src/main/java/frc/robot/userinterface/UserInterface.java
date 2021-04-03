@@ -18,4 +18,5 @@ public class UserInterface {
      */
     public static final RumbleXboxController operatorController = new RumbleXboxController(RobotMap.operatorXboxController);
 
+    public static final WiimoteController wiimoteController = new WiimoteController(RobotMap.wiimoteController);
 }
