@@ -51,9 +51,9 @@ public class DriveBase extends SubsystemBase {
             this.rightFrontFollowerVictor = new WPI_VictorSPX(RobotMap.rightFrontFollower);
             this.rightRearFollowerVictor = new WPI_VictorSPX(RobotMap.rightRearFollower);
     
-            leftFrontFollowerVictor.setInverted(false);
-            leftMiddleMaster.setInverted(false);
-            leftRearFollowerVictor.setInverted(false);
+            leftFrontFollowerVictor.setInverted(true);
+            leftMiddleMaster.setInverted(true);
+            leftRearFollowerVictor.setInverted(true);
             rightFrontFollowerVictor.setInverted(false);
             rightMiddleMaster.setInverted(false);
             rightRearFollowerVictor.setInverted(false);
