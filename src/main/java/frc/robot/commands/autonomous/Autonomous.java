@@ -2,6 +2,7 @@ package frc.robot.commands.autonomous;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.*;
+import frc.robot.RobotMap;
 
 public class Autonomous extends SequentialCommandGroup {
 
@@ -19,6 +20,7 @@ public class Autonomous extends SequentialCommandGroup {
         this.path = path;
         switch (path) {
             case BARREL: //robot's front center is halfway between B2 and D2
+            if(RobotMap.botName == RobotMap.BotNames.PBOT20){
                 addCommands(new DriveStraight(76.5, 0.6));
                 addCommands(new Circle(18, 355));
                 addCommands(new DriveStraight((83-15), 0.6)); //change
@@ -26,9 +28,13 @@ public class Autonomous extends SequentialCommandGroup {
                 addCommands(new DriveStraight(36, 0.6));
                 addCommands(new Circle(-18, -218)); 
                 addCommands(new DriveStraight(240,0.6)); 
+            } else if(RobotMap.botName == RobotMap.BotNames.COMPETITION){
+                //ADD COMPETITION BOT COMMANDS HERE
+            }
                 break;
             case SLALOM: 
                 //left front wheel is 8.5 inches from D2
+                if(RobotMap.botName == RobotMap.BotNames.PBOT20){
                 addCommands(new DriveStraight(13,0.4));
                 addCommands(new Turn(-50, 0.4)); //turn to line up with first gap
                 addCommands(new DriveStraight(91, 0.4)); //drive through first gap
@@ -43,9 +49,12 @@ public class Autonomous extends SequentialCommandGroup {
                 addCommands(new Turn(70,0.4));
                 addCommands(new DriveStraight(15,.4)); 
                 addCommands(new Circle(-28,-50));
+                } else if(RobotMap.botName == RobotMap.BotNames.COMPETITION){
+                    //ADD COMPETITION BOT COMMANDS HERE
+                }
                 break;
             case BOUNCE: //center halfway between B2 and D2
-
+            if(RobotMap.botName == RobotMap.BotNames.PBOT20){
                 addCommands(new DriveStraight(3,.4));
                 addCommands(new Circle(-28,90));
                 addCommands(new DriveStraight(-30,.4));
@@ -54,6 +63,9 @@ public class Autonomous extends SequentialCommandGroup {
                 addCommands(new Turn(180,0.6));
                 addCommands(new Circle(-30,160));
                 addCommands(new DriveStraight(90,.4));
+                } else if(RobotMap.botName == RobotMap.BotNames.COMPETITION){
+                    //ADD COMPETITION BOT COMMANDS HERE
+                }
             }
     }
 }

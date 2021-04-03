@@ -186,20 +186,4 @@ public class RobotMap {
     public static double convertToTicks(double inches) {
         return (4096 / (wheelDiameter * 3.1415926) * inches);
     }
-
-}
-     */
-    public static void setSpeedAndRotationCaps(double newSpeedCap, double newRotationCap) {
-        speedCap = (newSpeedCap > 1) ? 1 : newSpeedCap;
-        rotationCap = (newRotationCap > 1) ? 1 : newRotationCap;
-    }
-
-    /**
-     * @param inches Inches to convert.
-     * @return The equivalent distance in ticks.
-     */
-    public static double convertToTicks(double inches) {
-        return (4096 / (wheelDiameter * 3.1415926) * inches);
-    }
-
 }
