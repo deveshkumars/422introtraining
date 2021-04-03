@@ -13,13 +13,16 @@ public class DriveStraight extends CommandBase {
         setName("DriveStraight");
         addRequirements(Subsystems.driveBase);
         this.ticks = RobotMap.convertToTicks(inches);
-        this.forward = inches > 0;
+        if(inches>0) {
+            this.forward = true;
+        }
         this.speed = speed;
     }
     
     public void initialize(){
         Subsystems.driveBase.zeroEncoderPosition();
         Subsystems.driveBase.zeroGyroAngle();
+        System.out.println("starting drive straight");
     }
 
     public void execute(){
@@ -33,12 +36,19 @@ public class DriveStraight extends CommandBase {
         } else {
             Subsystems.driveBase.setMotors(this.speed * correction, this.speed);
         }
+        System.out.println(this.ticks);
+        System.out.println(Subsystems.driveBase.getLeftPosition());
+        System.out.println(Subsystems.driveBase.getRightPosition());
     }
 
     public boolean isFinished() {
-        double leftPosition = Math.abs(Subsystems.driveBase.getLeftPosition());
-        double rightPosition = Math.abs(Subsystems.driveBase.getRightPosition());
-        return (leftPosition > this.ticks) || (rightPosition > this.ticks);
+        double leftPosition = Subsystems.driveBase.getLeftPosition();
+        double rightPosition = Subsystems.driveBase.getRightPosition();
+        if (forward) {
+            return (leftPosition > this.ticks) || (rightPosition > this.ticks);
+        } else {
+            return (leftPosition < this.ticks) || (rightPosition < this.ticks);
+        }
     }
 
     public void end(boolean interrupted) {
