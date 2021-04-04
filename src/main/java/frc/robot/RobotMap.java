@@ -17,7 +17,7 @@ public class RobotMap {
     public static boolean isIntakeDown = false;
     public static int cellCount = 3;
     
-    public static double robotWidth = 1000;
+    public static double robotWidth = 27;
 
     // Drive base ports
 
@@ -196,5 +196,4 @@ public class RobotMap {
     public static double convertToTicks(double inches) {
         return (4096 / (wheelDiameter * 3.1415926) * inches);
     }
-
 }
