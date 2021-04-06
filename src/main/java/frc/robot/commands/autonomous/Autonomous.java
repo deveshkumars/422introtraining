@@ -10,7 +10,7 @@ public class Autonomous extends SequentialCommandGroup {
     }
 
     /** The path to use if an error occurs or none is selected. */
-    public static Path defaultAuto = Path.BARREL;
+    public static Path defaultAuto = Path.SLALOM;
 
     /** The path used on this specific auto object. */
     public Path path;
@@ -42,38 +42,52 @@ public class Autonomous extends SequentialCommandGroup {
                 break;
             case SLALOM: //center 5.5 inches above E2
                 System.out.print("starting Slalom");
-                addCommands(new DriveStraight(13,0.4));
+                addCommands(new DriveStraight(11,0.4));
                 addCommands(new Turn(-50, 0.4)); //turn to line up with first gap
                 addCommands(new DriveStraight(91, 0.4)); //drive through first gap
-                addCommands(new Turn(55, 0.4)); //turn to be parallel with line of cones
-                addCommands(new DriveStraight(86, 0.4)); //drive to end of line of cones
-                addCommands(new Turn(60, 0.4)); //turn to line up with second gap
+                addCommands(new Turn(55, 0.6)); //turn to be parallel with line of cones
+                addCommands(new DriveStraight(93, 0.4)); //drive to end of line of cones
+                addCommands(new Turn(80, 0.4)); //turn to line up with second gap
                 addCommands(new DriveStraight(38, 0.4)); //drive to tangent point with circle around last cone
-                addCommands(new Circle(-20, 100)); //drive circle around last cone
+                addCommands(new Circle(-15, 90)); //drive circle around last cone
                 addCommands(new DriveStraight(10,0.4));
-                addCommands(new Circle(-20, 180));
-                addCommands(new DriveStraight(40, 0.4)); //drive to tangent point with circle around last cone
-                addCommands(new Turn(60, 0.4)); //turn to line up with second gap
-                addCommands(new DriveStraight(99+40, 0.4)); //drive to end of line of cones
+                addCommands(new Circle(-15, 110));
+                addCommands(new DriveStraight(10,0.4));
+                addCommands(new Circle(-10,100));
+                addCommands(new DriveStraight(50, 0.4)); //drive to tangent point with circle around last cone
+                addCommands(new Turn(75, 0.6)); //turn to line up with second gap
+                addCommands(new DriveStraight(99+45, 0.4)); //drive to end of line of cones
                 addCommands(new Turn(70,0.4));
-                addCommands(new DriveStraight(15,.4));
+                addCommands(new DriveStraight(10,.4));
                 addCommands(new Circle(-28,-50));
                 break;
             case BOUNCE: //center halfway between B2 and D2
-                addCommands(new DriveStraight(16.5,.4));
-                addCommands(new Circle(-30,90));
+                // addCommands(new DriveStraight(16.5,.4));
+                // addCommands(new Circle(-30,90));
+                // addCommands(new DriveStraight(30,.4));
+                // addCommands(new Turn(-20,.4));
+                // addCommands(new DriveStraight(-105, .4));
+                // addCommands(new Turn(180,0.6));
+                // addCommands(new Circle(-30,160));
+                // addCommands(new DriveStraight(-90,.4));
                 addCommands(new DriveStraight(30,.4));
-                addCommands(new Turn(-20,.4));
-                addCommands(new DriveStraight(-105, .4));
-                addCommands(new Turn(180,0.6));
-                addCommands(new Circle(-30,160));
-                addCommands(new DriveStraight(-90,.4));
+                addCommands(new Turn(-90,0.4));
+                addCommands(new DriveStraight(60,.4));
+                addCommands(new DriveStraight(-60,.4));
+                addCommands(new Turn(-45,.4));
+                addCommands(new DriveStraight(-85,.4));
+                addCommands(new Turn(135,.4));
+                addCommands(new DriveStraight(30,.4));
+                addCommands(new Turn(-90,0.4));
+                addCommands(new DriveStraight(120,.4));
+                addCommands(new DriveStraight(-120,.4));
+                addCommands(new DriveStraight(90,.4));
                 break;
             case TEST:
-                addCommands(new DriveStraight(10, 0.4));
+                // addCommands(new DriveStraight(10, 0.4));
                 // addCommands(new Circle(24,360));
-                // addCommands(new Turn(360, 0.4));
-            
+                addCommands(new Turn(-90, 0.4));
+            break;
         }
     }
 }
