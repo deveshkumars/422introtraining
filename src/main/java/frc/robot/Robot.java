@@ -2,9 +2,9 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.commands.autonomous.*;
 import frc.robot.commands.*;
-import frc.robot.commands.autonomous.Autonomous;
 import frc.robot.userinterface.UserInterface;
 import frc.robot.subsystems.*;
 
@@ -59,11 +59,12 @@ public class Robot extends TimedRobot {
         // Schedule autonomous command to run
         // ShuffleboardControl.setAutonomous();
         // ShuffleboardControl.getAutonomous().schedule();
-        GalacticSearch galactic = new GalacticSearch();
-        galactic.schedule();
+        new GalacticSearch().schedule();
     }
 
-    public void autonomousPeriodic() {}
+    public void autonomousPeriodic() {
+        System.out.println("is intake down? " + RobotMap.isIntakeDown);
+    }
 
     public void teleopInit() { 
         System.out.println("TeleOp Initalized");

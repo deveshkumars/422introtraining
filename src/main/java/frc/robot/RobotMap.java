@@ -89,8 +89,8 @@ public class RobotMap {
             leftClimber = 422;
             rightClimber = 422;
 
-            intakeExtensionIn = 0;
-            intakeExtensionOut = 7;
+            intakeExtensionIn = 7;
+            intakeExtensionOut = 0;
         } else if (bot == BotNames.TOASTER){
             leftMiddleMaster = 2;
             leftFrontFollower = 3;

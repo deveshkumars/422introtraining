@@ -27,25 +27,9 @@ public class Vision {
             System.out.println("Path Red A");
             return GalacticSearch.Path.RedA;
         }
-        else if(cellRotationEntry.getDouble(360) < 27 && cellRotationEntry.getDouble(360) > 17.5){
-            System.out.println("Path Blue A");
-            return GalacticSearch.Path.BlueA;
-        }
-        else if(cellRotationEntry.getDouble(360) < -15 && cellRotationEntry.getDouble(360) > -25){
+        else {
             System.out.println("Path Red B");
             return GalacticSearch.Path.RedB;
-        }
-        else if(cellRotationEntry.getDouble(360) < 17.5 && cellRotationEntry.getDouble(360) > 8){
-            System.out.println("Path Blue B via right powercell");
-            return GalacticSearch.Path.BlueB;
-        }
-        else if(cellRotationEntry.getDouble(360) < -2 && cellRotationEntry.getDouble(360) > -12){
-            System.out.println("Path Blue B via left powercell");
-            return GalacticSearch.Path.BlueB;
-        }
-        else {
-            System.out.println("something went wrong");
-            return null;
         }
 
         
