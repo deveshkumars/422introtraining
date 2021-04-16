@@ -3,6 +3,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.*;
+import frc.robot.userinterface.UIMap;
 import frc.robot.userinterface.UserInterface;
 import frc.robot.subsystems.*;
 
@@ -23,8 +24,11 @@ public class Robot extends TimedRobot {
         RobotMap.setBot(RobotMap.BotNames.COMPETITION);
         System.out.println("Initializing" + RobotMap.botName);
 
+        //Choose from ControllerTank, ControllerTankFO (Field Oriented extras), JoystickTank, ControllerSplitArcade, ControllerSplitCurvature, and Wii
+        UIMap.setDriveMode(UIMap.DriveMode.ControllerTank);
+        System.out.println("Initializing" + UIMap.driveMode);
+
         //drive settings
-        Subsystems.driveBase.setDefaultCommand(new TankDrive());
         Subsystems.driveBase.cheesyDrive.setSafetyEnabled(false);
 
         //driver controls (buttons)

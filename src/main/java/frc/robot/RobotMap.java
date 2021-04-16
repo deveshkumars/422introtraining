@@ -45,11 +45,6 @@ public class RobotMap {
 
     // Sensor ports 
 
-    // UI Ports
-
-    public static final int driverXboxController = 1;
-    public static final int operatorXboxController = 2;
-
     public enum BotNames {
         COMPETITION, TOASTER, AXIDRIVE, PBOT20
     }
