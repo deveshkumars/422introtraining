@@ -1,4 +1,4 @@
-package frc.robot.commands;
+package frc.robot.commands.drivemodes;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotMap;
@@ -8,43 +8,65 @@ import frc.robot.userinterface.UserInterface;
 /**
  * Uses joystick values to drive the bot in teleop.
  */
-public class TankDrive extends CommandBase {
+public class WiiDrive extends CommandBase {
 
     private double updatedSpeed = 0;
     private double updatedRotation = 0;
     private final double maxChange = 0.5; //maxChange is acceleration
 
-    public TankDrive() {
-        setName("TankDrive");
+    public WiiDrive() {
+        setName("WiiDrive");
         addRequirements(Subsystems.driveBase);
     }
 
     public void execute() {
-        double speed;
+        double speed = 0;
         double rotation;
 
         /* Sets throttle for driveBase to the left stick Y-axis and sets the rotation
         * for driveBase to the right stick X-axis on on the driverXboxController */
-        if (UserInterface.driverController.getRightJoystickY() < -0.1) {
-            speed = -(Math.pow(UserInterface.driverController.getRightJoystickY(), 2));
-        } else if (UserInterface.driverController.getRightJoystickY() > 0.1) {
-            speed = (Math.pow(UserInterface.driverController.getRightJoystickY(), 2));
-        } else {
-            speed = 0;
+        if (UserInterface.wiimoteController.getButton2()) {
+            speed = updatedSpeed + maxChange;
+            if (speed > 1){
+                speed = 1.0;
+            }
         }
-        if (UserInterface.driverController.getLeftJoystickX() < -0.05) {
-            rotation = (Math.pow(UserInterface.driverController.getLeftJoystickX(), 5));
-        } else if (UserInterface.driverController.getLeftJoystickX() > 0.05) {
-            rotation = (Math.pow(UserInterface.driverController.getLeftJoystickX(), 5));
+        else if (UserInterface.wiimoteController.getButton1()){
+            speed = updatedSpeed - maxChange;
+            if (speed < -1){
+                speed = -1.0;
+            }
+        else{
+            if (updatedSpeed < 0){
+                if (updatedSpeed > -maxChange){
+                    speed = 0;
+                }
+                else{
+                    speed = updatedSpeed + maxChange;
+                }
+            }
+            if (updatedSpeed > 0){
+                if (updatedSpeed < maxChange){
+                    speed = 0;
+                }
+                else{
+                    speed = updatedSpeed - maxChange;
+                }
+            }
+            else{
+                speed = 0;
+            }
+        }
+
+        }
+        if (UserInterface.wiimoteController.getXRotation() < -0.05) {
+            rotation = (Math.pow(UserInterface.wiimoteController.getXRotation(), 5));
+        } else if (UserInterface.wiimoteController.getXRotation() > 0.05) {
+            rotation = (Math.pow(UserInterface.wiimoteController.getXRotation(), 5));
         } else {
             rotation = 0;
         }
-        double speedDifference = speed - updatedSpeed;
-        if (speedDifference > maxChange) {
-            speed = updatedSpeed + maxChange;
-        } else if (speedDifference < -maxChange) {
-            speed = updatedSpeed - maxChange;
-        }
+        
         double rotationDifference = rotation - updatedRotation;
         if (rotationDifference > maxChange) {
             rotation = updatedRotation + maxChange;
