@@ -23,7 +23,7 @@ public class ShootSequence extends CommandBase {
     }
 
     public void execute() {
-        if (Subsystems.flyboi.getPower() >= Subsystems.flyboi.wheelSpeed - 0.010) {
+        if (Subsystems.flyboi.getPower() >= Subsystems.flyboi.wheelSpeed - 0.010) { // checks to see if flywheel is up to speed
             if (timer < 6) {
                 timer++;
             } else{
@@ -32,7 +32,7 @@ public class ShootSequence extends CommandBase {
                 Subsystems.cellStop.feedBalls(0.5);
             }
         } else {
-            if (warmedUp && Subsystems.flyboi.getPower() < Subsystems.flyboi.wheelSpeed - 0.020) {
+            if (warmedUp && Subsystems.flyboi.getPower() < Subsystems.flyboi.wheelSpeed - 0.020) { // checks to see if the robot is warmed up and 
                 warmedUp = false;
                 RobotMap.cellCount--;
             }
@@ -41,7 +41,7 @@ public class ShootSequence extends CommandBase {
         }
     }
 
-    public boolean isFinished() {
+    public boolean isFinished() { // Finish if the right trigger is not being pressed
         return UserInterface.operatorController.getRightTrigger() < 0.4;
     }
 }

@@ -11,21 +11,21 @@ import frc.robot.RobotMap;
  */
 public class Intake extends SubsystemBase {
 
-    public WPI_TalonSRX intakeMotor;
+    public WPI_TalonSRX intakeMotor; // this is the intake motor
     public DoubleSolenoid intakeExtension;
 
     public Intake() {
         setSubsystem("Intake");
         this.intakeMotor = new WPI_TalonSRX(RobotMap.intakeMotor);
         this.intakeExtension = new DoubleSolenoid(RobotMap.intakeExtensionOut, RobotMap.intakeExtensionIn);
-        intakeMotor.setInverted(true);
+        intakeMotor.setInverted(true); // invert the intake motor
     }
 
     /**
      * Spins intake motors.
      * @param power The power at which the intake motors are set [-1 to 1].
      */
-    public void setIntakeMotors(double power) {
+    public void setIntakeMotors(double power) { // sets the intake motors to a certain power
         intakeMotor.set(ControlMode.PercentOutput, power);
     }
 
@@ -41,7 +41,7 @@ public class Intake extends SubsystemBase {
      */
     public void intakeExtend() {
         intakeExtension.set(DoubleSolenoid.Value.kForward);
-    }
+    } 
 
     /**
      * Retracts the intake (intake up).

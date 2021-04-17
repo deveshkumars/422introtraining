@@ -15,7 +15,7 @@ public class IntakeToggle extends CommandBase {
     }
 
     public void initialize() {
-        if (RobotMap.isIntakeDown) {
+        if (RobotMap.isIntakeDown) { //the switch to figure out what to do based on prior state
             Subsystems.intake.intakeRetract();
             System.out.println("intake retract");
         } else {
