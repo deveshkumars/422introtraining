@@ -60,7 +60,7 @@ public class UIMap {
                 Subsystems.driveBase.setDefaultCommand(new ControllerTankDrive());
                 break;
             case ControllerTankFancy:
-                Subsystems.driveBase.setDefaultCommand(new ControllerTankFancy());
+                Subsystems.driveBase.setDefaultCommand(new ControllerTankFancyDrive());
                 break;
             case JoystickTank:
                 Subsystems.driveBase.setDefaultCommand(new JoystickTankDrive());
