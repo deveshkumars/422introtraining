@@ -3,8 +3,14 @@ package frc.robot.commands.autonomous;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.*;
 
+/**
+ * The code that will be run during the autonomous period
+ */
 public class Autonomous extends SequentialCommandGroup {
 
+    /**
+     * The enumerator containing the paths
+     */
     public enum Path {
         BARREL, SLALOM, BOUNCE, TEST
     }
@@ -15,6 +21,9 @@ public class Autonomous extends SequentialCommandGroup {
     /** The path used on this specific auto object. */
     public Path path;
 
+    /**
+     * @param path The path that the robot will follow during the autonomous period
+     */
     public Autonomous(Path path) {
         this.path = path;
         switch (path) {

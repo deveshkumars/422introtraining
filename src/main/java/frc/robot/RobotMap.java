@@ -3,7 +3,7 @@ import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.networktables.*;
 
 /**
- * Ports for motor controllers, caps for speed and rotation, booleans for toggles, and turn direction.
+ * Ports for motor controllers, caps for spee and rotation, booleans for toggles, and turn direction.
  */
 public class RobotMap {
 

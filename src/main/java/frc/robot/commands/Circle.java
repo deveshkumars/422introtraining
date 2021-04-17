@@ -4,13 +4,16 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotMap;
 import frc.robot.subsystems.*;
 
+/**
+ * Makes the robot go in a circle (experimental and doesn't work)
+ */
 public class Circle extends CommandBase {
 
-    private double radius;
-    private double angle;
+    private double radius; //stores the radius of the circle
+    private double angle; //stores the arc angle of the cirle
 
-    private double maxSpeed = 0.4;
-    private double otherSpeed;
+    private double maxSpeed = 0.4; //stores the maximum speed of one side of the drivebase
+    private double otherSpeed; //stores the speed of the other side of the drivebase
     
     /**
      * @param radius The radius of the arc you want to traverse. Positive values turn you right, while negative values turn you left.
@@ -38,9 +41,11 @@ public class Circle extends CommandBase {
         } else {
             return (Subsystems.driveBase.getGyroAngle() < this.angle);
         }
-        
     }
     
+    /**
+     * Computes and sets the speeds of both sides of the drivebase
+     */
     private void setSpeeds() {
         if(radius > 0){
             otherSpeed = (maxSpeed / (radius + (RobotMap.robotWidth / 2))) * (radius - (RobotMap.robotWidth / 2));

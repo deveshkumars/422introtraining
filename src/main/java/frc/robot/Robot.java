@@ -82,7 +82,6 @@ public class Robot extends TimedRobot {
             Subsystems.climber.stopClimber();
         }
 
-
         // Left joystick - intake & transversal
         if (UserInterface.operatorController.getRightJoystickY() >= 0.4) {
             Subsystems.intake.setIntakeMotors(0.95);

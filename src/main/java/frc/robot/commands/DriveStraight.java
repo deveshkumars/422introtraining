@@ -4,6 +4,10 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotMap;
 import frc.robot.subsystems.*;
 
+/**
+ * uses adjustments to make the robot drive straight without deviation
+ */
+
 public class DriveStraight extends CommandBase {
     private double ticks;
     private boolean forward;
@@ -18,7 +22,7 @@ public class DriveStraight extends CommandBase {
         }
         this.speed = speed;
     }
-    
+
     public void initialize(){
         Subsystems.driveBase.zeroEncoderPosition();
         Subsystems.driveBase.zeroGyroAngle();
@@ -26,7 +30,7 @@ public class DriveStraight extends CommandBase {
     }
 
     public void execute(){
-        //Find correction to represent how far off robot is from straight linbe
+        //Find correction to represent how far off robot is from straight line
         double correction = Subsystems.driveBase.getGyroAngle();
         correction *= 0.05;
         correction += 1.0;
