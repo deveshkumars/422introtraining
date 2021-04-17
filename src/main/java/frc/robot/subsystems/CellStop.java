@@ -10,8 +10,8 @@ import frc.robot.RobotMap;
  * The mechanism that feeds balls into the flywheel.
  */
 public class CellStop extends SubsystemBase {
-    
-    private CANSparkMax feederWheel;
+
+    private CANSparkMax feederWheel; // Feeder wheel motor
 
     public CellStop(){
         setSubsystem("CellStop");

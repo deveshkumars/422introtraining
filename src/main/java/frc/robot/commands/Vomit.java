@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.*;
 
 /**
- *  Thi tspins the flywheel, helix, and intake motors backwords to take out power cells.
+ *  This spins the flywheel, helix, and intake motors backwords to take out power cells.
  */
 public class Vomit extends CommandBase {
 
