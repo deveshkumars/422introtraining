@@ -20,8 +20,7 @@ public class Robot extends TimedRobot {
     }
 
     public void robotInit() {
-        //Choose from AXIDRIVE (Axiom drivebase), TOASTER, PBOT20 (42D2), and COMPETITION
-        RobotMap.setBot(RobotMap.BotNames.COMPETITION);
+        RobotMap.setBot(RobotMap.BotNames.MECANUM);
         System.out.println("Initializing" + RobotMap.botName);
 
         //Choose from ControllerTank, ControllerTankFO (Field Oriented extras), JoystickTank, ControllerSplitArcade, ControllerSplitCurvature, and Wii
@@ -33,11 +32,7 @@ public class Robot extends TimedRobot {
 
         //driver controls (buttons)
         UserInterface.driverController.RB.whenPressed(new SlowFast());
-
-        //operator controls (buttons)
-        UserInterface.operatorController.LB.whileHeld(new Vomit());
-        UserInterface.operatorController.RB.whenPressed(new IntakeToggle());
-        
+    
         ShuffleboardControl.layoutShuffleboard();
     }
 
@@ -70,60 +65,26 @@ public class Robot extends TimedRobot {
 
     public void teleopPeriodic() {
 
-        //X,Y buttons - Climber
-        if (UserInterface.operatorController.getYButton()) {
-            Subsystems.climber.extendClimber(0.5);
-        } else if (UserInterface.operatorController.getXButton()) {
-            Subsystems.climber.retractClimber(0.5);
-        } else {
-            Subsystems.climber.stopClimber();
-        }
+        // double xcomp = UserInterface.driverController.getLeftJoystickX();
+        // double ycomp = UserInterface.driverController.getLeftJoystickY();
+        // double magnitude = Math.sqrt(xcomp*xcomp + ycomp*ycomp);
+        double direction = UserInterface.driverController.getRadians(); // make sure it is driver controller
+        double x = Math.cos(direction);
+        double y = Math.sin(direction);
+        double magnitude = UserInterface.driverController.getMagnitude();
 
+        if (magnitude > 1) {
+            magnitude =  1 //magnitude / 1.415 // ceiling of sqrt(2)
+        }
+        // if (Math.abs(xcomp+ycomp)>1||Math.abs(ycomp-xcomp)>1) {
+        //     double cap
+        //     cap = 1/(Math.Maximum(Math.abs(xcomp+ycomp), Math.abs(ycomp-xcomp)));
+        // }
+        // Subsystems.driveBase.setMotor((y + x)caprot, (y - x)caprot, (y - x)caprot, (y + x)caprot);
 
-        // Left joystick - intake & transversal
-        if (UserInterface.operatorController.getRightJoystickY() >= 0.4) {
-            Subsystems.intake.setIntakeMotors(0.95);
-            Subsystems.transversal.setTransversalMotors(0.8);
-        } else if (UserInterface.operatorController.getRightJoystickY() <= -0.4) {
-            Subsystems.intake.setIntakeMotors(-0.95);
-            Subsystems.transversal.setTransversalMotors(-0.8);
-        } else {
-            Subsystems.intake.stopIntakeMotors();
-            Subsystems.transversal.stopTransversalMotors();
-        }
-
-        if (UserInterface.operatorController.getLeftJoystickY() >= 0.4) {
-            Subsystems.transversal.setTransversalMotors(-0.8);
-        } else if (UserInterface.operatorController.getLeftJoystickY() <= -0.4) {
-            Subsystems.transversal.setTransversalMotors(0.8);
-        }
-
-        // Left trigger - hold for warmup flywheel
-        boolean isLeftTriggerOn = UserInterface.operatorController.getLeftTrigger() >= 0.4;
-        if (isLeftTriggerOn && !oldLeftTriggerOn) {
-            Subsystems.flyboi.spinWheel(0.5);
-        } else if (!isLeftTriggerOn && oldLeftTriggerOn) {
-            Subsystems.flyboi.stopWheel();
-        }
-        oldLeftTriggerOn = isLeftTriggerOn;
-        
-        // Right trigger - hold for shoot sequence
-        boolean isRightTriggerOn = UserInterface.operatorController.getRightTrigger() >= 0.4;
-        if (isRightTriggerOn && !oldRightTriggerOn) {
-            new ShootSequence().schedule();
-        } else if (!isRightTriggerOn && oldRightTriggerOn) {
-            new ShootStop().schedule();
-        }
-        oldRightTriggerOn = isRightTriggerOn;
-
-        // D-Pad - CellStop control
-        int direction = UserInterface.operatorController.getPOVAngle();
-        if (direction == 0) {
-            Subsystems.cellStop.feedBalls(0.5);
-        }  else if (direction == 180) {
-            Subsystems.cellStop.feedBalls(-0.5);
-        } else if (!isRightTriggerOn) {
-            Subsystems.cellStop.stopFeed();
-        }
+        // if (Math.abs(xcomp+ycomp)>1||Math.abs(ycomp-xcomp)>1) {
+        //     double cap
+        //     cap = 1/(Math.Maximum(Math.abs(xcomp+ycomp), Math.abs(ycomp-xcomp)));
+        // }
     }
 }

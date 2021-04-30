@@ -82,4 +82,13 @@ public class RumbleXboxController extends XboxController {
         this.setRumble(RumbleType.kLeftRumble, intensity);
         this.setRumble(RumbleType.kRightRumble, intensity);
     }
+
+    // finds the degrees the joystick is pointing in
+    public int getRadians(){
+        return joystick.getRadians();
+    }
+
+    public int getMagnitude(){
+        return joystick.getMagnitude();
+    }
 }

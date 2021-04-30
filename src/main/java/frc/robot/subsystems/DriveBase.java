@@ -17,22 +17,17 @@ import frc.robot.RobotMap;
  * The drive base of the robot. Includes all drive train motor controllers as well as sensors such as gyros and encoders, and can use PID to set its motor speeds.
  */
 public class DriveBase extends SubsystemBase {
-
-    public WPI_TalonSRX leftMiddleMaster;
-    public WPI_TalonSRX rightMiddleMaster;
-    public WPI_TalonSRX leftFrontFollowerTalon;
-    public WPI_TalonSRX leftRearFollowerTalon;
-    public WPI_TalonSRX rightFrontFollowerTalon;
-    public WPI_TalonSRX rightRearFollowerTalon;
     
-    public WPI_VictorSPX leftFrontFollowerVictor;
-    public WPI_VictorSPX leftRearFollowerVictor;
-    public WPI_VictorSPX rightFrontFollowerVictor;
-    public WPI_VictorSPX rightRearFollowerVictor;
+    public WPI_TalonSRX leftFrontTalon;
+    public WPI_TalonSRX rightFrontTalon;
+    public WPI_TalonSRX leftBackTalon;
+    public WPI_TalonSRX rightBackTalon;
 
     public ADXRS450_Gyro gyro;
-    private SpeedControllerGroup leftSide;
-    private SpeedControllerGroup rightSide;
+    private SpeedControllerGroup leftFrontGroup;
+    private SpeedControllerGroup leftBackGroup;
+    private SpeedControllerGroup rightBackGroup;
+    private SpeedControllerGroup rightFront;
     public DifferentialDrive cheesyDrive;
     private static final SPI.Port kGyroPort = SPI.Port.kOnboardCS0;
 
@@ -42,100 +37,43 @@ public class DriveBase extends SubsystemBase {
     public DriveBase() {
         setSubsystem("DriveBase");
 
-        if (RobotMap.botName == RobotMap.BotNames.COMPETITION) {
-            //Practice/comp bot
-            this.leftMiddleMaster = new WPI_TalonSRX(RobotMap.leftMiddleMaster);
-            this.rightMiddleMaster = new WPI_TalonSRX(RobotMap.rightMiddleMaster);
-            this.leftFrontFollowerVictor = new WPI_VictorSPX(RobotMap.leftFrontFollower);
-            this.leftRearFollowerVictor = new WPI_VictorSPX(RobotMap.leftRearFollower);
-            this.rightFrontFollowerVictor = new WPI_VictorSPX(RobotMap.rightFrontFollower);
-            this.rightRearFollowerVictor = new WPI_VictorSPX(RobotMap.rightRearFollower);
-    
-            leftFrontFollowerVictor.setInverted(false);
-            leftMiddleMaster.setInverted(false);
-            leftRearFollowerVictor.setInverted(false);
-            rightFrontFollowerVictor.setInverted(false);
-            rightMiddleMaster.setInverted(false);
-            rightRearFollowerVictor.setInverted(false);
-    
-            this.leftSide = new SpeedControllerGroup(leftMiddleMaster, leftFrontFollowerVictor, leftRearFollowerVictor);
-            this.rightSide = new SpeedControllerGroup(rightMiddleMaster, rightFrontFollowerVictor, rightRearFollowerVictor);
-    
-        } else if (RobotMap.botName == RobotMap.BotNames.TOASTER) {
-            //Toaster
-            this.leftMiddleMaster = new WPI_TalonSRX(RobotMap.leftMiddleMaster);
-            this.rightMiddleMaster = new WPI_TalonSRX(RobotMap.rightMiddleMaster);            
-            this.leftFrontFollowerTalon = new WPI_TalonSRX(RobotMap.leftFrontFollower);
-            this.leftRearFollowerTalon = new WPI_TalonSRX(RobotMap.leftRearFollower);
-            this.rightFrontFollowerTalon = new WPI_TalonSRX(RobotMap.rightFrontFollower);
-            this.rightRearFollowerTalon = new WPI_TalonSRX(RobotMap.rightRearFollower);
+        if (RobotMap.botName == RobotMap.BotNames.MECANUM) {
+            //2021 Offseason Mecanum Experiment
+            this.leftFrontTalon = new WPI_TalonSRX(RobotMap.leftFront);
+            this.leftBackTalon = new WPI_TalonSRX(RobotMap.leftBack);
+            this.rightFrontTalon = new WPI_TalonSRX(RobotMap.rightFront);
+            this.rightBackTalon = new WPI_TalonSRX(RobotMap.rightFront);
 
-            leftFrontFollowerTalon.setInverted(true);
-            leftMiddleMaster.setInverted(true);
-            leftRearFollowerTalon.setInverted(true);
-            leftMiddleMaster.setInverted(true);
-
-            this.leftSide = new SpeedControllerGroup(leftMiddleMaster, leftFrontFollowerTalon, leftRearFollowerTalon);
-            this.rightSide = new SpeedControllerGroup(rightMiddleMaster, rightFrontFollowerTalon, rightRearFollowerTalon);
-        } else if (RobotMap.botName == RobotMap.BotNames.AXIDRIVE){ 
-            //Axiom's drivebase, for ease of drive practice and testing
-            this.leftMiddleMaster = new WPI_TalonSRX(RobotMap.leftMiddleMaster);
-            this.rightMiddleMaster = new WPI_TalonSRX(RobotMap.rightMiddleMaster);            
-            this.leftFrontFollowerVictor = new WPI_VictorSPX(RobotMap.leftFrontFollower);
-            this.leftRearFollowerVictor = new WPI_VictorSPX(RobotMap.leftRearFollower);
-            this.rightFrontFollowerVictor = new WPI_VictorSPX(RobotMap.rightFrontFollower);
-            this.rightRearFollowerVictor = new WPI_VictorSPX(RobotMap.rightRearFollower);
-
-            leftMiddleMaster.setInverted(true);
-            leftFrontFollowerVictor.setInverted(true);
-            leftRearFollowerVictor.setInverted(true);
-    
-            this.leftSide = new SpeedControllerGroup(leftMiddleMaster, leftFrontFollowerVictor, leftRearFollowerVictor);
-            this.rightSide = new SpeedControllerGroup(rightMiddleMaster, rightFrontFollowerVictor, rightRearFollowerVictor);
-    
-        } else if (RobotMap.botName == RobotMap.BotNames.PBOT20){
-            //2020's PBOT (42D2)
-            this.leftMiddleMaster = new WPI_TalonSRX(RobotMap.leftMiddleMaster);
-            this.rightMiddleMaster = new WPI_TalonSRX(RobotMap.rightMiddleMaster); 
-            this.leftFrontFollowerVictor = new WPI_VictorSPX(RobotMap.leftFrontFollower);
-            this.leftRearFollowerVictor = new WPI_VictorSPX(RobotMap.leftRearFollower);
-            this.rightFrontFollowerVictor = new WPI_VictorSPX(RobotMap.rightFrontFollower);
-            this.rightRearFollowerVictor = new WPI_VictorSPX(RobotMap.rightRearFollower);
-
-            leftFrontFollowerVictor.setInverted(true);
-            leftMiddleMaster.setInverted(true);
-            leftRearFollowerVictor.setInverted(true);
-
-            this.leftSide = new SpeedControllerGroup(leftMiddleMaster, leftFrontFollowerVictor, leftRearFollowerVictor);
-            this.rightSide = new SpeedControllerGroup(rightMiddleMaster, rightFrontFollowerVictor, rightRearFollowerVictor);
-
+            this.leftFrontGroup = new SpeedControllerGroup(leftFrontTalon);
+            this.rightFrontGroup = new SpeedControllerGroup(rightFrontTalon);
+            this.leftBackGroup = new SpeedControllerGroup(leftBackTalon);
+            this.rightBackGroup = new SpeedControllerGroup(rightBackTalon);
         }
+
 
         // this.gyro = new ADIS16470_IMU();
         this.gyro = new ADXRS450_Gyro(kGyroPort);
-
-        leftMotorTicks = leftMiddleMaster.getSelectedSensorPosition(0);
-        rightMotorTicks = rightMiddleMaster.getSelectedSensorPosition(0);
-
-        this.cheesyDrive = new DifferentialDrive(leftSide, rightSide);
-    }
 
     /**
      * Sets drive train motors.
      * @param left Left side motors' velocity (-1 to 1)
      * @param right Right side motors' velocity (-1 to 1)
      */
-    public void setMotors(double left, double right) {
-        leftSide.set(left);
-        rightSide.set(right);
+    public void setMotors(double frontLeft, double frontRight, double backLeft, double backRight) {
+        leftFrontGroup.set(frontLeft);
+        rightFrontGroup.set(frontRight);
+        leftBackGroup.set(backLeft);
+        rightBackGroup.set(backRight);
     }
 
     /**
      * Sets drive train motors to zero, effectively stopping the bot.
      */
     public void stopMotors() {
-        leftSide.set(0);
-        rightSide.set(0);
+        leftFrontGroup.set(0);
+        rightFrontGroup.set(0);
+        leftBackGroup.set(0);
+        rightBackGroup.set(0);
     }
 
     /**

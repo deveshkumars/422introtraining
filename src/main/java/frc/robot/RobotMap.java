@@ -46,7 +46,7 @@ public class RobotMap {
     // Sensor ports 
 
     public enum BotNames {
-        COMPETITION, TOASTER, AXIDRIVE, PBOT20
+        COMPETITION, TOASTER, AXIDRIVE, PBOT20, MECANUM
     }
 
     public static BotNames botName;
@@ -57,97 +57,14 @@ public class RobotMap {
      */
     public static void setBot(BotNames bot) {
         botName = bot;
-        if (bot == BotNames.COMPETITION) {
-            rightFrontFollower = 7;
-            rightMiddleMaster = 29;
-            rightRearFollower = 8;
-            leftFrontFollower = 9;
-            leftMiddleMaster = 58;
-            leftRearFollower = 45;
+        if (bot == BotNames.MECANUM) {
+            rightFront = 12;
+            rightBack = 14;
+            leftFront = 10;
+            leftBack = 11;
             wheelDiameter = 6;
-
-            leftFlywheel = 422;
-            rightFlywheel = 422;
-            intakeMotor = 32;
-            bottomBelt = 12;
-            middleBelt = 422;
-            feederWheel = 422;
-
-            leftClimber = 422;
-            rightClimber = 422;
-
-            intakeExtensionIn = 0;
-            intakeExtensionOut = 7;
-        } else if (bot == BotNames.TOASTER){
-            leftMiddleMaster = 2;
-            leftFrontFollower = 3;
-            leftRearFollower = 6;
-            rightMiddleMaster = 14;
-            rightFrontFollower = 5; 
-            rightRearFollower = 4;
-
-            wheelDiameter = 6;
-
-            leftFlywheel = 422;
-            rightFlywheel = 422;
-            intakeMotor = 422;
-            bottomBelt = 422;
-            middleBelt = 422;
-            feederWheel = 422;
-
-            leftClimber = 422;
-            rightClimber = 422;
-
-            intakeExtensionIn = 0;
-            intakeExtensionOut = 1;
-        } else if (bot == BotNames.AXIDRIVE){
-            leftMiddleMaster = 1;
-            leftFrontFollower = 2;
-            leftRearFollower = 3;
-            rightMiddleMaster = 4;
-            rightFrontFollower = 5; 
-            rightRearFollower = 6;
-
-            wheelDiameter = 6;
-
-            leftFlywheel = 422;
-            rightFlywheel = 422;
-            intakeMotor = 422;
-            bottomBelt = 422;
-            middleBelt = 422;
-            feederWheel = 422;
-
-            leftClimber = 422;
-            rightClimber = 422;
-
-            intakeExtensionIn = 0;
-            intakeExtensionOut = 1;
-        }else if (bot == BotNames.PBOT20){
-        //jenkyboi tm
-        leftMiddleMaster = 34;
-        leftFrontFollower = 3;
-        leftRearFollower = 6;
-        rightMiddleMaster = 31;
-        rightFrontFollower = 5; 
-        rightRearFollower = 4;
-
-        wheelDiameter = 6;
-
-        leftFlywheel = 422;
-        rightFlywheel = 422;
-        intakeMotor = 422;
-        bottomBelt = 422;
-        middleBelt = 422;
-        feederWheel = 422;
-
-        leftClimber = 422;
-        rightClimber = 422;
-
-        intakeExtensionIn = 0;
-        intakeExtensionOut = 1;
+        }
     }
-}
-
     /**
      * @return The speed cap for the drive base in teleop.
      */
