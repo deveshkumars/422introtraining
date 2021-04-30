@@ -173,4 +173,12 @@ public class DriveBase extends SubsystemBase {
     public void zeroGyroAngle() {
         gyro.reset();
     }
+
+    /**
+     * Sets the motor voltage for PID control
+     */
+    public void setMotorsVoltage(double left, double right){
+        leftSide.setVoltage(left);
+        rightSide.setVoltage(right);
+    }
 }

@@ -1,5 +1,10 @@
 package frc.robot;
 
+import edu.wpi.first.wpilibj.controller.PIDController;
+import java.util.function.DoubleSupplier;
+import frc.robot.subsystems.*;
+
+
 /**
  * Ports for motor controllers, caps for speed and rotation, booleans for toggles, and turn direction.
  */
@@ -44,6 +49,10 @@ public class RobotMap {
     public static int intakeExtensionIn;
 
     // Sensor ports 
+
+    // PID Controller
+    public static PIDController driveSpeedPID;
+    public static DoubleSupplier driveSpeedPIDmeasurementSupplier;
 
     public enum BotNames {
         COMPETITION, TOASTER, AXIDRIVE, PBOT20
@@ -146,6 +155,13 @@ public class RobotMap {
         intakeExtensionIn = 0;
         intakeExtensionOut = 1;
     }
+
+    driveSpeedPID = new PIDController(422, 422, 422);
+
+    driveSpeedPIDmeasurementSupplier = () -> {
+        Subsystems.driveBase.zeroEncoderPosition();
+        return (Subsystems.driveBase.getLeftPosition() + Subsystems.driveBase.getRightPosition()) / 2;
+    };
 }
 
     /**
@@ -172,4 +188,11 @@ public class RobotMap {
         rotationCap = (newRotationCap > 1) ? 1 : newRotationCap;
     }
 
+    /**
+     * @param inches Inches to convert.
+     * @return The equivalent distance in ticks.
+     */
+    public static double convertToTicks(double inches) {
+        return (4096 / (wheelDiameter * 3.1415926) * inches);
+    }
 }
