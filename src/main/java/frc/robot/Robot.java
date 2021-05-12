@@ -28,7 +28,7 @@ public class Robot extends TimedRobot {
         System.out.println("Initializing" + RobotMap.botName);
 
         //Choose from ControllerTank, ControllerTankFO (Field Oriented extras), JoystickTank, ControllerSplitArcade, ControllerSplitCurvature, and Wii
-        UIMap.setDriveMode(UIMap.DriveMode.ControllerTank);
+        UIMap.setDriveMode(UIMap.DriveMode.MecanumDrive);
         System.out.println("Initializing" + UIMap.driveMode);
 
         //drive settings
