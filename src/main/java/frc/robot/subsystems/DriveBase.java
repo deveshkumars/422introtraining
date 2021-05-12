@@ -27,12 +27,14 @@ public class DriveBase extends SubsystemBase {
     private SpeedControllerGroup leftFrontGroup;
     private SpeedControllerGroup leftBackGroup;
     private SpeedControllerGroup rightBackGroup;
-    private SpeedControllerGroup rightFront;
+    private SpeedControllerGroup rightFrontGroup;
     public DifferentialDrive cheesyDrive;
     private static final SPI.Port kGyroPort = SPI.Port.kOnboardCS0;
 
-    public double leftMotorTicks = 0;
-    public double rightMotorTicks = 0;
+    public double leftFrontMotorTicks = 0;
+    public double rightFrontMotorTicks = 0;
+    public double leftBackMotorTicks = 0;
+    public double rightBackMotorTicks = 0;
 
     public DriveBase() {
         setSubsystem("DriveBase");
@@ -53,7 +55,7 @@ public class DriveBase extends SubsystemBase {
 
         // this.gyro = new ADIS16470_IMU();
         this.gyro = new ADXRS450_Gyro(kGyroPort);
-
+    }
     /**
      * Sets drive train motors.
      * @param left Left side motors' velocity (-1 to 1)
@@ -77,20 +79,6 @@ public class DriveBase extends SubsystemBase {
     }
 
     /**
-     * @return Left side position in ticks.
-     */
-    public double getLeftPosition() {
-        return leftMiddleMaster.getSelectedSensorPosition(0) - leftMotorTicks;
-    }
-
-    /**
-     * @return Right side position in ticks.
-     */
-    public double getRightPosition() {
-        return rightMiddleMaster.getSelectedSensorPosition(0) - rightMotorTicks;
-    }
-
-    /**
      * @return Angle at which the robot is positioned in degrees
      */
     public double getGyroAngle() {
@@ -101,8 +89,10 @@ public class DriveBase extends SubsystemBase {
      * Resets the reference point used to calculate distance traveled. Does not physically change the encoder value.
      */
     public void zeroEncoderPosition() {
-        leftMotorTicks = leftMiddleMaster.getSelectedSensorPosition(0);
-        rightMotorTicks = rightMiddleMaster.getSelectedSensorPosition(0);
+        leftFrontMotorTicks = leftFrontTalon.getSelectedSensorPosition(0);
+        rightFrontMotorTicks = rightFrontTalon.getSelectedSensorPosition(0);
+        leftBackMotorTicks = leftBackTalon.getSelectedSensorPosition(0);
+        rightBackMotorTicks = rightBackTalon.getSelectedSensorPosition(0);
     }
 
     /**

@@ -10,6 +10,8 @@ public class RobotMap {
     private static double speedCap = 0.8;
     private static double rotationCap = 0.7;
 
+    public static double sideCount = 0; //note using double because mod doesn't like int for some reason
+
     public static boolean isSpeedMode = true;
     public static boolean isFirstCamera = true;
     public static boolean isIntakeDown = false;
@@ -17,36 +19,15 @@ public class RobotMap {
 
     // Drive base ports
 
-    public static int leftFrontFollower;
-    public static int leftMiddleMaster;
-    public static int leftRearFollower;
-    public static int rightFrontFollower;
-    public static int rightMiddleMaster;
-    public static int rightRearFollower;
+    public static int rightFront;
+    public static int rightBack;
+    public static int leftFront;
+    public static int leftBack;
 
     public static int wheelDiameter;
 
-    // Subsystem motor ports
-
-    public static int leftFlywheel;
-    public static int rightFlywheel;
-    public static int intakeMotor;
-    public static int bottomBelt;
-    public static int middleBelt;
-    public static int feederWheel;
-
-    public static int leftClimber;
-    public static int rightClimber;
-
-    // Double solenoid ports
-
-    public static int intakeExtensionOut;
-    public static int intakeExtensionIn;
-
-    // Sensor ports 
-
     public enum BotNames {
-        COMPETITION, TOASTER, AXIDRIVE, PBOT20, MECANUM
+        MECANUM
     }
 
     public static BotNames botName;
@@ -62,7 +43,7 @@ public class RobotMap {
             rightBack = 14;
             leftFront = 10;
             leftBack = 11;
-            wheelDiameter = 6;
+            wheelDiameter = 4;
         }
     }
     /**

@@ -19,7 +19,7 @@ public class SlowFast extends CommandBase {
         RobotMap.setSpeedAndRotationCaps(0.3, 0.5);
         RobotMap.isSpeedMode = false;
       } else {
-        RobotMap.setSpeedAndRotationCaps(0.8, 0.7);
+        RobotMap.setSpeedAndRotationCaps(1, 1);
         RobotMap.isSpeedMode = true;
       }  
     }

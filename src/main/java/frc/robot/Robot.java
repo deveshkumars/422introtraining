@@ -1,6 +1,10 @@
 package frc.robot;
 
+import org.opencv.core.Scalar;
+
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.GenericHID.Hand;
+import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.*;
 import frc.robot.userinterface.UIMap;
@@ -65,26 +69,25 @@ public class Robot extends TimedRobot {
 
     public void teleopPeriodic() {
 
-        // double xcomp = UserInterface.driverController.getLeftJoystickX();
-        // double ycomp = UserInterface.driverController.getLeftJoystickY();
-        // double magnitude = Math.sqrt(xcomp*xcomp + ycomp*ycomp);
-        double direction = UserInterface.driverController.getRadians(); // make sure it is driver controller
-        double x = Math.cos(direction);
-        double y = Math.sin(direction);
-        double magnitude = UserInterface.driverController.getMagnitude();
-
-        if (magnitude > 1) {
-            magnitude =  1 //magnitude / 1.415 // ceiling of sqrt(2)
+        if (UserInterface.driverController.LB.get()){
+            new Port().schedule();
         }
-        // if (Math.abs(xcomp+ycomp)>1||Math.abs(ycomp-xcomp)>1) {
-        //     double cap
-        //     cap = 1/(Math.Maximum(Math.abs(xcomp+ycomp), Math.abs(ycomp-xcomp)));
-        // }
-        // Subsystems.driveBase.setMotor((y + x)caprot, (y - x)caprot, (y - x)caprot, (y + x)caprot);
 
-        // if (Math.abs(xcomp+ycomp)>1||Math.abs(ycomp-xcomp)>1) {
-        //     double cap
-        //     cap = 1/(Math.Maximum(Math.abs(xcomp+ycomp), Math.abs(ycomp-xcomp)));
-        // }
+        if (UserInterface.driverController.RB.get()){
+            new Starboard().schedule();
+        }
+
+        if (UserInterface.driverController.getStickButton(Hand.kRight)) {
+            new SteadyAhead().schedule();
+        }
+
+        if (UserInterface.driverController.getAButton()) {
+            new SlowFast().schedule();
+        }
+
+        if (UserInterface.driverController.getXButton()) {
+            new Reset().schedule();
+        }
+
     }
 }

@@ -137,9 +137,6 @@ public class ShuffleboardControl {
      * Updates data used in Shuffleboard. This will be updated even if the robot is disabled.
      */
     public static void printDataToShuffleboard() {
-        //control panel
-        setSpeedWidget.setDouble(Subsystems.flyboi.wheelSpeed);
-        actualSpeedWidget.setDouble(Subsystems.flyboi.getPower());
 
         //cell count
         cellCountWidget.setDouble(RobotMap.cellCount);
@@ -152,11 +149,6 @@ public class ShuffleboardControl {
         else autoEnabledTicks++;
         if (DriverStation.getInstance().isAutonomousEnabled() || (DriverStation.getInstance().isDisabled() && autoEnabledTicks < 50)) time += 135;
         matchTimeWidget.setDouble(time);
-
-        //sensor values
-        encodersWidget.setString(Subsystems.driveBase.getLeftPosition() + " L " + Subsystems.driveBase.getRightPosition() + " R");
-        gyroWidget.setDouble(Subsystems.driveBase.getGyroAngle());
-        isIntakeUpWidget.setBoolean(!RobotMap.isIntakeDown);
     }
 
     /**

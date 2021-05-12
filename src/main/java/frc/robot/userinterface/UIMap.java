@@ -22,7 +22,8 @@ public class UIMap {
         JoystickTank, //left joystick drives left side, right joystick drives right side
         ControllerSplitArcade, //left joystick controls speed, right joystick controls heading
         ControllerSplitCurvature, //left joystick controls speed, right joystick controls curvature and heading when right trigger held
-        Wii //2 drives forwards, 1 drives backwards, rotation controls heading
+        Wii, //2 drives forwards, 1 drives backwards, rotation controls heading
+        MecanumDrive
     }
 
     public static DriveMode driveMode;
@@ -35,45 +36,48 @@ public class UIMap {
         driveMode = mode;
 
         //set up UI ports based on controller used by selected driveMode
-        if (mode == DriveMode.JoystickTank){
-            driverXboxController = 422;
-            leftJoystyx = 0;
-            rightJoystyx = 1;
-            wiimoteController = 422;
-        }
-        else if (mode == DriveMode.Wii){
+        if (mode == DriveMode.MecanumDrive){
             driverXboxController = 1;
             leftJoystyx = 422;
             rightJoystyx = 422;
-            wiimoteController = 3;
+            wiimoteController = 0;
         }
-        else {
-            driverXboxController = 1;
-            leftJoystyx = 422;
-            rightJoystyx = 422;
-            wiimoteController = 422;
-        }
+        // else if (mode == DriveMode.Wii){
+        //     driverXboxController = 1;
+        //     leftJoystyx = 422;
+        //     rightJoystyx = 422;
+        //     wiimoteController = 3;
+        // }
+        // else {
+        //     driverXboxController = 1;
+        //     leftJoystyx = 422;
+        //     rightJoystyx = 422;
+        //     wiimoteController = 422;
+        // }
 
         //set default drivebase command based on selected driveMode
         switch (mode) {
-            case ControllerTank:
-                Subsystems.driveBase.setDefaultCommand(new ControllerTankDrive());
-                break;
-            case ControllerTankFancy:
-                Subsystems.driveBase.setDefaultCommand(new ControllerTankFancy());
-                break;
-            case JoystickTank:
-                Subsystems.driveBase.setDefaultCommand(new JoystickTankDrive());
-                break;
-            case ControllerSplitArcade:
-                Subsystems.driveBase.setDefaultCommand(new ControllerSplitArcadeDrive());
-                break;
-            case ControllerSplitCurvature:
-                Subsystems.driveBase.setDefaultCommand(new ControllerSplitCurvatureDrive());
-                break;
-            case Wii:
-                Subsystems.driveBase.setDefaultCommand(new WiiDrive());
-                break;
+            // case ControllerTank:
+            //     Subsystems.driveBase.setDefaultCommand(new ControllerTankDrive());
+            //     break;
+            // case ControllerTankFancy:
+            //     Subsystems.driveBase.setDefaultCommand(new ControllerTankFancy());
+            //     break;
+            // case JoystickTank:
+            //     Subsystems.driveBase.setDefaultCommand(new JoystickTankDrive());
+            //     break;
+            // case ControllerSplitArcade:
+            //     Subsystems.driveBase.setDefaultCommand(new ControllerSplitArcadeDrive());
+            //     break;
+            // case ControllerSplitCurvature:
+            //     Subsystems.driveBase.setDefaultCommand(new ControllerSplitCurvatureDrive());
+            //     break;
+            // case Wii:
+            //     Subsystems.driveBase.setDefaultCommand(new WiiDrive());
+            //     break;
+            case MecanumDrive:
+                Subsystems.driveBase.setDefaultCommand(new MecanumDrive());
+
         }
     }
 
