@@ -1,10 +1,7 @@
 package frc.robot;
 
-import org.opencv.core.Scalar;
-
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
-import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.*;
 import frc.robot.userinterface.UIMap;
@@ -15,9 +12,6 @@ import frc.robot.subsystems.*;
  * The main Robot class whence all things come.
  */
 public class Robot extends TimedRobot {
-    
-    private boolean oldLeftTriggerOn = false;
-    private boolean oldRightTriggerOn = false;
 
     public Robot() {
         super(0.06);
