@@ -26,7 +26,7 @@ public class Robot extends TimedRobot {
         System.out.println("Initializing" + UIMap.driveMode);
 
         //drive settings
-        Subsystems.driveBase.cheesyDrive.setSafetyEnabled(false);
+        Subsystems.driveBase.mecanumDrive.setSafetyEnabled(false);
 
         //driver controls (buttons)
         UserInterface.driverController.RB.whenPressed(new SlowFast());
@@ -62,26 +62,6 @@ public class Robot extends TimedRobot {
     }
 
     public void teleopPeriodic() {
-
-        if (UserInterface.driverController.LB.get()){
-            new Port().schedule();
-        }
-
-        if (UserInterface.driverController.RB.get()){
-            new Starboard().schedule();
-        }
-
-        if (UserInterface.driverController.getStickButton(Hand.kRight)) {
-            new SteadyAhead().schedule();
-        }
-
-        if (UserInterface.driverController.getAButton()) {
-            new SlowFast().schedule();
-        }
-
-        if (UserInterface.driverController.getXButton()) {
-            new Reset().schedule();
-        }
 
     }
 }

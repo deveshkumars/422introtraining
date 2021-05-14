@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import frc.robot.RobotMap;
 // import frc.robot.commands.TankDrive;
 
@@ -26,7 +27,7 @@ public class DriveBase extends SubsystemBase {
     private SpeedControllerGroup leftBackGroup;
     private SpeedControllerGroup rightBackGroup;
     private SpeedControllerGroup rightFrontGroup;
-    public DifferentialDrive cheesyDrive;
+    public MecanumDrive mecanumDrive;
     private static final SPI.Port kGyroPort = SPI.Port.kOnboardCS0;
 
     public double leftFrontMotorTicks = 0;
@@ -48,6 +49,8 @@ public class DriveBase extends SubsystemBase {
             this.rightFrontGroup = new SpeedControllerGroup(rightFrontTalon);
             this.leftBackGroup = new SpeedControllerGroup(leftBackTalon);
             this.rightBackGroup = new SpeedControllerGroup(rightBackTalon);
+
+            this.mecanumDrive = new MecanumDrive(leftFrontGroup, leftBackGroup, rightFrontGroup, rightBackGroup);
         }
 
 
@@ -59,21 +62,15 @@ public class DriveBase extends SubsystemBase {
      * @param left Left side motors' velocity (-1 to 1)
      * @param right Right side motors' velocity (-1 to 1)
      */
-    public void setMotors(double frontLeft, double frontRight, double backLeft, double backRight) {
-        leftFrontGroup.set(frontLeft);
-        rightFrontGroup.set(frontRight);
-        leftBackGroup.set(backLeft);
-        rightBackGroup.set(backRight);
+    public void setMotors(double ySpeed, double xSpeed, double zRotation) {
+        mecanumDrive.driveCartesian(ySpeed, xSpeed, zRotation);
     }
 
     /**
      * Sets drive train motors to zero, effectively stopping the bot.
      */
     public void stopMotors() {
-        leftFrontGroup.set(0);
-        rightFrontGroup.set(0);
-        leftBackGroup.set(0);
-        rightBackGroup.set(0);
+        mecanumDrive.stopMotor();
     }
 
     /**
