@@ -80,5 +80,9 @@ public class Robot extends TimedRobot {
             new Reset().schedule();
         }
 
+        if (UserInterface.driverController.getYButton()) {
+            Subsystems.driveBase.zeroGyroAngle();
+        }
+
     }
 }
