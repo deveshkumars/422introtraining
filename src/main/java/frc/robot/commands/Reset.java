@@ -39,7 +39,7 @@ public class Reset extends CommandBase {
 
     public boolean isFinished() {
 
-        return (Subsystems.driveBase.getGyroAngle() == 0);
+        return (angle == 0);
 
     }
 

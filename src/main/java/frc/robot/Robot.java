@@ -27,9 +27,6 @@ public class Robot extends TimedRobot {
 
         //drive settings
         Subsystems.driveBase.cheesyDrive.setSafetyEnabled(false);
-
-        //driver controls (buttons)
-        UserInterface.driverController.RB.whenPressed(new SlowFast());
     
         ShuffleboardControl.layoutShuffleboard();
     }
