@@ -21,18 +21,19 @@ public class Reset extends CommandBase {
     }
 
     public void execute() {
-        angle = Subsystems.driveBase.getGyroAngle()+(((oldSideCount)%4)*90);
-        if (angle > (((RobotMap.sideCount)%4)*90)) {
+        angle =RobotMap.trueAngle + Subsystems.driveBase.getGyroAngle();
+        if (angle > 0) {
             Subsystems.driveBase.setMotors(-speed, speed, -speed, speed);
-        } else if (angle <(((RobotMap.sideCount)%4)*90)) {
+        } else if (angle < 0) {
             Subsystems.driveBase.setMotors(speed, -speed, speed, -speed);
         } else {
             Subsystems.driveBase.stopMotors();
         }
+        System.out.println(angle);
     }
 
     public void end() {
-
+        RobotMap.trueAngle = RobotMap.trueAngle + Subsystems.driveBase.getGyroAngle();
         Subsystems.driveBase.zeroGyroAngle();
 
     }

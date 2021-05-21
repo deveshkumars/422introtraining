@@ -11,6 +11,7 @@ public class RobotMap {
     private static double rotationCap = 0.7;
 
     public static double sideCount = 0; //note using double because mod doesn't like int for some reason
+    public static double trueAngle = 0;
 
     public static boolean isSpeedMode = true;
     public static boolean isFirstCamera = true;

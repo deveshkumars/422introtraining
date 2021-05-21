@@ -26,7 +26,7 @@ public class SteadyAhead extends CommandBase {
     }
 
     public void end() {
-
+        RobotMap.trueAngle = RobotMap.trueAngle + Subsystems.driveBase.getGyroAngle();
         Subsystems.driveBase.zeroGyroAngle();
 
     }
