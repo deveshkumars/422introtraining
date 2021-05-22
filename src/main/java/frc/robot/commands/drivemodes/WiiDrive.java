@@ -12,7 +12,7 @@ public class WiiDrive extends CommandBase {
 
     private double updatedSpeed = 0;
     private double updatedRotation = 0;
-    private final double maxChange = 0.5; //maxChange is acceleration
+    private final double maxChange = 0.4; //maxChange is acceleration
 
     public WiiDrive() {
         setName("WiiDrive");
@@ -25,17 +25,19 @@ public class WiiDrive extends CommandBase {
 
         /* Sets throttle for driveBase to the left stick Y-axis and sets the rotation
         * for driveBase to the right stick X-axis on on the driverXboxController */
+        System.out.println(UserInterface.wiimoteController.getButton2());
         if (UserInterface.wiimoteController.getButton2()) {
-            speed = updatedSpeed + maxChange;
+            speed = updatedSpeed + maxChange*.5;
             if (speed > 1){
                 speed = 1.0;
             }
         }
         else if (UserInterface.wiimoteController.getButton1()){
             speed = updatedSpeed - maxChange;
-            if (speed < -1){
-                speed = -1.0;
+            if (speed < -0.5){
+                speed = -0.5;
             }
+        }
         else{
             if (updatedSpeed < 0){
                 if (updatedSpeed > -maxChange){
@@ -58,11 +60,17 @@ public class WiiDrive extends CommandBase {
             }
         }
 
-        }
-        if (UserInterface.wiimoteController.getXRotation() < -0.05) {
-            rotation = (Math.pow(UserInterface.wiimoteController.getXRotation(), 5));
-        } else if (UserInterface.wiimoteController.getXRotation() > 0.05) {
-            rotation = (Math.pow(UserInterface.wiimoteController.getXRotation(), 5));
+        System.out.println(UserInterface.wiimoteController.getXRotation());
+        if (UserInterface.wiimoteController.getXRotation()*0.5 < -0.075 && (UserInterface.wiimoteController.getButton2()||UserInterface.wiimoteController.getButton1())) {
+            rotation = -.5*Math.pow(-UserInterface.wiimoteController.getXRotation(),.5);
+            if (rotation < -1.0){
+                rotation = -1.0;
+            }
+        } else if (UserInterface.wiimoteController.getXRotation()*0.5 > 0.075 && (UserInterface.wiimoteController.getButton2()||UserInterface.wiimoteController.getButton1()) ) {
+            rotation = .5*Math.pow(UserInterface.wiimoteController.getXRotation(),.5);
+            if (rotation > 1.0){
+                rotation = 1.0;
+            }
         } else {
             rotation = 0;
         }

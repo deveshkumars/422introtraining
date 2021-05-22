@@ -6,13 +6,13 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 public class WiimoteController extends GenericHID{
 
     public enum Button {
-        kNumber1(0),
-        kNumber2(1),
-        kA(2),
-        kB(3),
-        kPlus(4),
-        kMinus(5),
-        kHome(6);
+        kNumber1(1),
+        kNumber2(2),
+        kA(3),
+        kB(4),
+        kPlus(5),
+        kMinus(6),
+        kHome(7);
     
         @SuppressWarnings({"MemberName", "PMD.SingularField"})
         public final int value;
